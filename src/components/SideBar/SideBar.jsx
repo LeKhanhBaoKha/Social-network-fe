@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import Home from "../../assets/svg/Home.svg";
 import Video from "../../assets/svg/video.svg";
 import Saved from "../../assets/svg/saved.svg";
@@ -8,8 +8,13 @@ import Group from "../../assets/svg/Group.svg";
 import Message from "../../assets/svg/Message.svg";
 
 const SideBar = () => {
-    const [activeTab, setActiveTab] = useState("Home");
+    const [activeTab, setActiveTab] = useState("/Home");
+    const location = useLocation();
 
+    useEffect(() => {
+        console.log(location.pathname);
+        setActiveTab(location.pathname);
+    }, [activeTab]);
     const tabs = [
         {
             name: "Trang chủ",
@@ -54,13 +59,13 @@ const SideBar = () => {
     return (<div className="w-[259px] h-[370px] bg-white border">
         <div className="mt-[18px]">
             {tabs.map(({ name, svg, url }) => (
-                <Link to={url} onClick={() => setActiveTab(url)}>
+                <NavLink to={url} onClick={() => { setActiveTab(url) }}>
                     <div className={`mt-[10px] py-[2px] w-[200px] h-[40px] ml-[19px] flex rounded-xl 
-                    ${activeTab == url ? "bg-[#1B66C9] text-white" : "hover:bg-[#E6E6E6] transition-all"}`}>
+                    ${activeTab.includes(url) ? "bg-[#1B66C9] text-white" : "hover:bg-[#E6E6E6] transition-all"}`}>
                         {svg}
                         <p className="mt-2 ml-[15px]">{name}</p>
                     </div>
-                </Link>
+                </NavLink>
             ))}
         </div>
 
