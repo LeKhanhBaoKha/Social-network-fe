@@ -14,7 +14,7 @@ import CommentButton from '../../assets/svg/CommentButton.svg';
 import LikeButton from '../../assets/svg/LikeButton.svg';
 import SaveButton from '../../assets/svg/SaveButton.svg';
 import ShareButton from '../../assets/svg/ShareButton.svg';
-
+import video from "../../assets/video/sky.MOV";
 const Post = () => {
 
     const reactions = [
@@ -84,6 +84,10 @@ const Post = () => {
             {/* content */}
             <div className="my-[13px] content max-w-[500px] max-h-[400px]">
                 <img src={tigerImage} alt="content"></img>
+                {/* <video>
+                    <source src={video} type="video/mp4">
+                    </source>
+                </video> */}
             </div>
             {/* end content */}
 
