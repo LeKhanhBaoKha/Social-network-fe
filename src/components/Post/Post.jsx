@@ -48,7 +48,7 @@ const Post = () => {
   ];
 
   return (
-    <div className="w-[500px] h-[600px] border rounded-2xl bg-white">
+    <div className="w-[560px] lg:w-[500px]  h-[600px] border rounded-2xl bg-white">
       {/* postUser */}
       <div className="postUser flex justify-between ml-[12px] mt-[11px]">
         <div className="flex">
@@ -98,7 +98,7 @@ const Post = () => {
       {/* endtextContent */}
 
       {/* content */}
-      <div className="my-[13px] content max-w-[500px] max-h-[400px]">
+      <div className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[400px]">
         <img src={tigerImage} alt="content"></img>
         {/* <video>
                     <source src={video} type="video/mp4">
@@ -125,7 +125,7 @@ const Post = () => {
       {/* end reactions */}
 
       {/* button */}
-      <div className="button w-[464px] h-[44px] flex justify-between text-[#66676B] mx-[17px] border-b">
+      <div className="button w-[524px] lg:w-[464px] h-[44px] flex justify-between text-[#66676B] mx-[17px] border-b">
         <div className="w-[111px] h-[30px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
           <button className="flex flex-row gap-[5px]">
             <img src={LikeButton} alt=""></img>
