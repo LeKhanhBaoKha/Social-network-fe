@@ -1,1 +1,19 @@
 // Ở đây chứa các cấu hình scss chung, chẳng hạn như các màu, font chữ ......
+/* File CSS toàn cục */
+.scrollbar::-webkit-scrollbar {
+    width: 8px; /* Chiều rộng thanh cuộn */
+  }
+  
+  .scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* Màu nền của thanh cuộn */
+    border-radius: 10px; /* Góc bo tròn của thanh cuộn */
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #888; /* Màu của thanh cuộn */
+    border-radius: 10px; /* Góc bo tròn của thanh cuộn */
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Màu khi trượt thanh cuộn */
+  }  
