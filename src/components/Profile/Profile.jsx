@@ -2,6 +2,7 @@ import Post from "../Post/Post";
 import ProfileAlbum from "./Album";
 import ProfileFriendList from "./FriendList";
 import ProfileHeader from "./Header";
+
 import { Introduction } from "./Introduction";
 
 export default function Profile() {
@@ -24,6 +25,7 @@ export default function Profile() {
           <Post />
           <Post />
         </div>
+
       </div>
     </div>
   );

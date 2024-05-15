@@ -10,8 +10,10 @@ export function Introduction() {
     Relationship: "Độc thân",
   };
 
+
   return (
     <div className="w-[560px] lg:w-[360px] min-h-[350px] bg-white border rounded-xl">
+
       <div className="m-4 flex gap-[10px] flex-col">
         <h1 className="font-bold text-lg">Giới thiệu</h1>
         <button className="w-full p-2 bg-gray-300 rounded-lg text-lg hover:bg-gray-200 transition-colors">
