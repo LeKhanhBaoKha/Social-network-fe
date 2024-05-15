@@ -1,10 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+
 import tigerImage from "../../assets/images/tiger.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faComment } from "@fortawesome/free-regular-svg-icons";
 import Batngo from "../../assets/svg/Batngo.svg";
 import Buon from "../../assets/svg/Buon.svg";
+import ThreeDot from "../../assets/svg/ThreeDot.svg";
 import BuonCuoi from "../../assets/svg/BuonCuoi.svg";
 import PhanNo from "../../assets/svg/PhanNo.svg";
 import Thich from "../../assets/svg/Thich.svg";
@@ -14,8 +19,13 @@ import CommentButton from "../../assets/svg/CommentButton.svg";
 import LikeButton from "../../assets/svg/LikeButton.svg";
 import SaveButton from "../../assets/svg/SaveButton.svg";
 import ShareButton from "../../assets/svg/ShareButton.svg";
-import video from "../../assets/video/sky.MOV";
+import DetailPost from "./DetailPost";
+
 const Post = () => {
+  const [open, setOpen] = useState(false);
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+
   const reactions = [
     {
       name: "Like",
@@ -52,7 +62,7 @@ const Post = () => {
       {/* postUser */}
       <div className="postUser flex justify-between ml-[12px] mt-[11px]">
         <div className="flex">
-          <div className="m-[10px] w-[40px] h-[40px] overflow-hidden rounded-full">
+          <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
             <img
               className=""
               src="https://m.media-amazon.com/images/M/MV5BMTc3MzY3MjQ3OV5BMl5BanBnXkFtZTcwODI3NjQxMw@@._V1_.jpg"
@@ -66,21 +76,7 @@ const Post = () => {
           </div>
         </div>
         <div className="">
-          <svg
-            className="mt-[38px] mr-[35px]"
-            width="16"
-            height="4"
-            viewBox="0 0 16 4"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2ZM10 2C10 3.10457 9.10457 4 8 4C6.89543 4 6 3.10457 6 2C6 0.895431 6.89543 0 8 0C9.10457 0 10 0.895431 10 2ZM14 4C15.1046 4 16 3.10457 16 2C16 0.895431 15.1046 0 14 0C12.8954 0 12 0.895431 12 2C12 3.10457 12.8954 4 14 4Z"
-              fill="#8C939C"
-            />
-          </svg>
+          <img className="mt-[38px] mr-[35px]" src={ThreeDot} alt="" />
         </div>
       </div>
       {/* end postUser */}
@@ -98,13 +94,23 @@ const Post = () => {
       {/* endtextContent */}
 
       {/* content */}
-      <div className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[400px]">
+      <div
+        onClick={onOpenModal}
+        className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[400px]"
+      >
         <img src={tigerImage} alt="content"></img>
-        {/* <video>
-                    <source src={video} type="video/mp4">
-                    </source>
-                </video> */}
       </div>
+      <Modal
+        classNames={{
+          overlay: "customOverlay",
+          modal: "customModal",
+        }}
+        open={open}
+        onClose={onCloseModal}
+        center
+      >
+        <DetailPost />
+      </Modal>
       {/* end content */}
 
       {/* reatcions */}

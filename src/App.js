@@ -7,6 +7,8 @@ import ProfileHeader from "./components/Profile/Header";
 import ProfileAlbum from "./components/Profile/Album";
 import ProfileFriendList from "./components/Profile/FriendList";
 import Profile from "./components/Profile/Profile";
+import CreatePost from "./components/Profile/CreatePost";
+import DetailPost from "./components/Post/DetailPost";
 
 function App() {
   return (
