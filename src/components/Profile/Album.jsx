@@ -20,7 +20,9 @@ export default function ProfileAlbum() {
   }, []);
 
   return (
-    <div className="w-[360px] min-h-[350px] border rounded-xl mb-[10px] bg-white">
+
+    <div className="w-[560px] lg:w-[360px] min-h-[350px] border rounded-xl bg-white">
+
       <div className="m-4 flex gap-[10px] flex-col">
         <div className="flex justify-between">
           <h1 className="font-bold text-lg p-2">Ảnh</h1>
@@ -33,14 +35,18 @@ export default function ProfileAlbum() {
         <div className="grid grid-cols-3 gap-4 rounded-xl">
           {Imagedata &&
             Imagedata.slice(0, 9).map((image) => (
-              <div>
-                <img
-                  key={image.id}
-                  src={image.download_url}
-                  alt={image.author}
-                  className="w-[100px] h-[100px] object-cover hover:"
-                />
-              </div>
+
+              <NavLink className="hover:cursor-pointer">
+                <div>
+                  <img
+                    key={image.id}
+                    src={image.download_url}
+                    alt={image.author}
+                    className="w-[150px] h-[150px] lg:w-[100px] lg:h-[100px] rounded-xl object-cover hover:"
+                  />
+                </div>
+              </NavLink>
+
             ))}
         </div>
       </div>
