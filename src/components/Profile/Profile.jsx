@@ -3,6 +3,7 @@ import ProfileAlbum from "./Album";
 import CreatePost from "./CreatePost";
 import ProfileFriendList from "./FriendList";
 import ProfileHeader from "./Header";
+
 import { Introduction } from "./Introduction";
 
 export default function Profile() {
@@ -34,6 +35,7 @@ export default function Profile() {
           <Post />
           <Post />
         </div>
+
       </div>
     </div>
   );
