@@ -1,9 +1,13 @@
+/* styles.css */
 .customOverlay {
-  //   background: rgba(36, 123, 160, 0.7);
+  background: transparent;
 }
-.customModal {
-  max-width: 1500px;
+
+.customModalDetailPost {
+  max-width: 100vw;
   padding: 0;
   margin: 0;
   width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
 }

@@ -1,7 +1,7 @@
-import YeuThich from "./svg/YeuThich.svg";
-import Home from "./svg/Home.svg";
-import Location from "./svg/location.svg";
-import Education from "./svg/education.svg";
+import YeuThich from "../../assets/svg/Profile/svg/YeuThich.svg";
+import Home from "../../assets/svg/Profile/svg/Home.svg";
+import Location from "../../assets/svg/Profile/svg/location.svg";
+import Education from "../../assets/svg/Profile/svg/education.svg";
 export function Introduction() {
   const data = {
     studied_at: "Từng học tại Cao đẳng cao thắng",
@@ -21,12 +21,16 @@ export function Introduction() {
           {Object.entries(data).map(([key, value]) => (
             <li className="w-full flex" key={key}>
               {key == "studied_at" && (
-                <img className="ml-[4px]" src={Education} />
+                <img className="ml-[4px]" src={Education} alt="" />
               )}
-              {key == "LiveIn" && <img className="ml-[5px]" src={Home} />}
-              {key == "ComeFrom" && <img className="ml-[5px]" src={Location} />}
+              {key == "LiveIn" && (
+                <img className="ml-[5px]" src={Home} alt="" />
+              )}
+              {key == "ComeFrom" && (
+                <img className="ml-[5px]" src={Location} alt="" />
+              )}
               {key == "Relationship" && (
-                <img className="ml-[2px]" src={YeuThich} />
+                <img className="ml-[2px]" src={YeuThich} alt="" />
               )}
 
               <p className="ml-[5px] mt-[4px]">{value}</p>

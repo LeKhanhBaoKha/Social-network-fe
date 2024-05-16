@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-
+import "../../assets/scss/components/DetailPost/DetailPost.scss";
 import tigerImage from "../../assets/images/tiger.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
@@ -102,8 +102,8 @@ const Post = () => {
       </div>
       <Modal
         classNames={{
-          overlay: "customOverlay",
-          modal: "customModal",
+          overlay: "",
+          modal: "customModalDetailPost",
         }}
         open={open}
         onClose={onCloseModal}
