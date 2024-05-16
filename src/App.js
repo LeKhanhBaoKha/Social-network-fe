@@ -6,7 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom/dist";
 import { Home } from "./pages/Home";
 import { Layout } from "./layout/Layout";
 import { Components } from "./pages/Conponents";
-import '@/assets/scss/master.scss';import { Introduction } from "./components/Profile/Introduction";
+import "@/assets/scss/master.scss";
+import { Introduction } from "./components/Profile/Introduction";
 import ProfileHeader from "./components/Profile/Header";
 import ProfileAlbum from "./components/Profile/Album";
 import ProfileFriendList from "./components/Profile/FriendList";
@@ -17,12 +18,13 @@ import DetailPost from "./components/Post/DetailPost";
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
+      <Routes>
         <Route path="/" element={<Layout />}>
-        <Route index element={<Home />}></Route>
-        <Route path="components" element={<Components />}></Route>
+          <Route index element={<Home />}></Route>
+          <Route path="components" element={<Components />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
         </Route>
-    </Routes>
+      </Routes>
     </BrowserRouter>
   );
 }

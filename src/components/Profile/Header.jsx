@@ -32,7 +32,6 @@ export default function ProfileHeader() {
   ];
 
   return (
-
     <div className="w-screen lg:w-[940px] bg-white rounded-xl">
       {/* background-img */}
       <div className="h-[200px] lg:w-[940px] lg:h-[400px] overflow-hidden rounded-xl m-auto">
@@ -98,8 +97,6 @@ export default function ProfileHeader() {
         ))}
       </div>
       {/* end tabs */}
-
- 
     </div>
   );
 }
