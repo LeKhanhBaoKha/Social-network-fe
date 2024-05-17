@@ -25,7 +25,7 @@ export const Navbar = () => {
     const showPopup = () => {
         if(isShowPopup)
             {
-                let className = 'absolute top-[40px] right-[40px] shadow-2xl scrollbar'
+                let className = 'absolute top-[40px] right-[40px] shadow-2xl scrollbar z-[9999] bg-white'
                 switch (tabActive) {
                     case 0 : {
                         return <PopupMesssage className={`${className}`}></PopupMesssage>
@@ -42,7 +42,7 @@ export const Navbar = () => {
                 }
             }
     }
-    return <div className="navbar flex justify-between px-4 pr-[40px] pt-[12px] pb-[12px] items-center">
+    return <div className="navbar fixed w-full bg-white flex justify-between px-4 pr-[40px] pt-[12px] pb-[12px] items-center">
         <div className="logo">
             <img src={LogoSocial} alt="Logo mạng xã hội" />
         </div>
