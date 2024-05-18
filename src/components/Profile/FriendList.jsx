@@ -25,9 +25,7 @@ export default function ProfileFriendList() {
     console.log(FriendsData);
   }
   return (
-
     <div className="w-[560px] lg:w-[360px] min-h-[526px] border rounded-xl bg-white">
-
       <div className="m-4 flex gap-[10px] flex-col">
         <div className="flex justify-between">
           <div>
@@ -43,19 +41,17 @@ export default function ProfileFriendList() {
         <div className="grid grid-cols-3 gap-4 rounded-xl">
           {FriendsData &&
             FriendsData.slice(0, 9).map((friend) => (
-
               <NavLink className="hover:cursor-pointer">
                 <div className="rounded-xl">
                   <img
                     key={friend.id}
                     src={friend.image}
                     alt={friend.username}
-                    className="w-[150px] h-[150px] lg:w-[100px] lg:h-[100px] rounded-xl object-cover hover:"
+                    className="w-[150px] h-[150px] lg:w-[100px] lg:h-[100px] rounded-xl object-cover hover:cursor-pointer "
                   />
                   <p className="mt-1">{friend.username}</p>
                 </div>
               </NavLink>
-
             ))}
         </div>
       </div>
