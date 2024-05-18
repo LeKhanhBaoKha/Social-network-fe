@@ -16,6 +16,7 @@ import CreatePost from "./components/Profile/CreatePost";
 import DetailPost from "./components/Post/DetailPost";
 import Introduce from "./components/Introduce/Introduce";
 import FriendTab from "./components/FriendTab/FriendTab";
+import AlbumTab from "./components/Album/AlbumTab";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="profile" element={<Profile />}></Route>
           <Route path="about" element={<Introduce />}></Route>
           <Route path="friends" element={<FriendTab />}></Route>
+          <Route path="album" element={<AlbumTab />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

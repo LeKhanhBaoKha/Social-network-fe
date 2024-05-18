@@ -28,7 +28,7 @@ export default function FriendTab() {
   }
   return (
     <div className="w-[900px] flex flex-col border rounded-xl p-2">
-      <div className="flex w-[600px] gap-[100px]">
+      <div className="flex w-[600px] gap-[100px] mx-[31px]">
         <h1 className="text-lg font-semibold py-2">Bạn bè</h1>
         <div className="flex justify-center items-center">
           <form className="w-[300px] mx-auto">
@@ -44,7 +44,7 @@ export default function FriendTab() {
           </form>
         </div>
       </div>
-      <div className="grid grid-cols-2 m-auto gap-[20px] my-[10px]">
+      <div className="grid grid-cols-2 m-[31px] gap-[20px] my-[10px]">
         {FriendsData &&
           FriendsData.map((friend) => (
             <NavLink className="hover:cursor-pointer">
