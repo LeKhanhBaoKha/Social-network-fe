@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+
 export default function ProfileFriendList() {
   const [FriendsData, setFriendsData] = useState();
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function ProfileFriendList() {
                     key={friend.id}
                     src={friend.image}
                     alt={friend.username}
-                    className="w-[150px] h-[150px] lg:w-[100px] lg:h-[100px] rounded-xl object-cover hover:"
+                    className="w-[150px] h-[150px] lg:w-[100px] lg:h-[100px] rounded-xl object-cover hover:cursor-pointer "
                   />
                   <p className="mt-1">{friend.username}</p>
                 </div>
