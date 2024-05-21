@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export default function AlbumTab() {
+export default function VideoTab() {
   const [Imagedata, setImageData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +22,7 @@ export default function AlbumTab() {
   return (
     <div className="w-[900px] flex flex-col border rounded-xl p-2">
       <div>
-        <h1 className="text-lg font-semibold py-2 ml-[31px]">Ảnh</h1>
+        <h1 className="text-lg font-semibold py-2 ml-[31px]">Video của bạn</h1>
       </div>
       <div className="grid grid-cols-5 gap-y-[15px]">
         {Imagedata &&
