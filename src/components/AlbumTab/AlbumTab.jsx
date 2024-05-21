@@ -22,7 +22,7 @@ export default function AlbumTab() {
   return (
     <div className="w-[900px] flex flex-col border rounded-xl p-2">
       <div>
-        <h1 className="text-lg font-semibold py-2 ml-[31px]">Ảnh</h1>
+        <h1 className="text-lg font-semibold py-2 ml-[31px]">Ảnh của bạn</h1>
       </div>
       <div className="grid grid-cols-5 gap-y-[15px]">
         {Imagedata &&
