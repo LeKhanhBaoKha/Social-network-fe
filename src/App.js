@@ -18,6 +18,8 @@ import Introduce from "./components/Introduce/Introduce";
 import FriendTab from "./components/FriendTab/FriendTab";
 import AlbumTab from "./components/AlbumTab/AlbumTab";
 import Chatbox from "./components/Chatbox/Chatbox";
+import Story from "./components/Story/Story";
+import FriendList from "./components/FriendList/FriendList";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="friends" element={<FriendTab />}></Route>
           <Route path="album" element={<AlbumTab />}></Route>
           <Route path="chatbox" element={<Chatbox />}></Route>
+          <Route path="story" element={<Story />}></Route>
+          <Route path="FriendList" element={<FriendList />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
