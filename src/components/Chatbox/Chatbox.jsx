@@ -86,7 +86,7 @@ export default function Chatbox() {
     autoResize();
   }, [text]);
   return (
-    <div className="w-[385px] h-[500px] border rounded-lg flex flex-col">
+    <div className="w-[360px] h-[500px] border rounded-lg flex flex-col">
       {/* header */}
       <div className="flex flex-row p-2 justify-between border-b h-[70px]">
         <div className="flex flex-row gap-[10px] hover:cursor-pointer">
@@ -133,14 +133,14 @@ export default function Chatbox() {
             } "`}
           >
             {user === "Sarah" && (
-              <div className="flex flex-row items-center gap-[8px] px-1">
-                <div className="">
+              <div className="flex flex-row items-center px-1">
+                <div className="p-1  rounded-full hover:bg-purple-100 transition-colors">
                   <img src={threedot} alt="" />
                 </div>
-                <div className="">
+                <div className="p-1 rounded-full hover:bg-purple-100 transition-colors">
                   <img className="transform scale-x-[-1]" src={share} alt="" />
                 </div>
-                <div className="">
+                <div className="p-1  rounded-full hover:bg-purple-100 transition-colors">
                   <img src={smile} alt="" />
                 </div>
               </div>
@@ -150,14 +150,14 @@ export default function Chatbox() {
             </p>
             {user === "Cornor" && (
               <div className="flex flex-row items-center px-1">
-                <div className="p-2  rounded-full hover:bg-purple-100 transition-colors">
+                <div className="p-1  rounded-full hover:bg-purple-100 transition-colors">
                   <img src={smile} alt="" />
                 </div>
-                <div className="p-2 rounded-full hover:bg-purple-100 transition-colors">
+                <div className="p-1 rounded-full hover:bg-purple-100 transition-colors">
                   <img className="transform scale-x-[-1]" src={share} alt="" />
                 </div>
 
-                <div className="p-2 rounded-full hover:bg-purple-100 transition-colors">
+                <div className="p-1 rounded-full hover:bg-purple-100 transition-colors">
                   <img src={threedot} alt="" />
                 </div>
               </div>
