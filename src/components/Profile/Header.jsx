@@ -56,11 +56,11 @@ export default function ProfileHeader() {
 
           {/* button */}
           <div className="lg:my-10 flex justify-center translate-y-[-90%] lg:translate-y-[0%]">
-            <button className="p-2 rounded-lg text-lg text-white bg-purple-500 mr-[10px] hover:bg-purple-400 transition-colors">
+            <button className="font-medium p-2 rounded-lg text-lg text-white bg-purple-500 mr-[10px] hover:bg-purple-400 transition-colors">
               <FontAwesomeIcon className="mr-2" icon={faPlus} />
               Thêm vào tin
             </button>
-            <button className="p-2 rounded-lg text-lg  bg-gray-300 hover:bg-gray-200 transition-colors">
+            <button className="font-medium p-2 rounded-lg text-lg  bg-gray-300 hover:bg-gray-200 transition-colors">
               <FontAwesomeIcon className="mr-2" icon={faPlus} />
               Chỉnh sửa trang cá nhân
             </button>
