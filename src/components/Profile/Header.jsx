@@ -1,5 +1,5 @@
-import bg_img from "./svg/bg_img.jpg";
-import avatar from "./svg/anhdaidien.jpg";
+import bg_img from "../../assets/images/bg_img.jpg";
+import avatar from "../../assets/images/anhdaidien.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";

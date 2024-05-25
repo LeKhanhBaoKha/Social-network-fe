@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import smile from "../../assets/svg/CreatePost/smile-svgrepo-com.svg";
+import gif from "../../assets/svg/CreatePost/gif-svgrepo-com.svg";
 import "react-responsive-modal/styles.css";
 import "../../assets/scss/components/CreatePost/CreatePost.scss";
 import { Modal } from "react-responsive-modal";
 import {
   faCaretDown,
   faCog,
+  faFaceLaughWink,
+  faFaceSmile,
+  faFaceSmileWink,
   faGlobe,
+  faLocationDot,
+  faPhotoVideo,
+  faSmile,
   faUserCheck,
   faUserFriends,
   faUserLock,
+  faUserTag,
   faUserTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -118,15 +127,41 @@ export default function CreatePost() {
             {/* content */}
 
             <div className="">
-              <textarea
-                className="focus:outline-none"
-                id="w3review"
-                name="w3review"
-                rows="6"
-                cols="70"
-                placeholder="Bạn đang nghĩ gì?"
-              ></textarea>
-              <div></div>
+              <div className="overflow-y-auto">
+                <textarea
+                  className="focus:outline-none text-lg	overflow-y-auto"
+                  id="w3review"
+                  name="w3review"
+                  rows="5"
+                  cols="65"
+                  placeholder="Bạn đang nghĩ gì?"
+                ></textarea>
+              </div>
+              <div className="flex text-lg justify-between	 items-center w-full mt-[20px] h-[50px] p-4 mb-[20px] border rounded-xl">
+                <p className="font-medium">Thêm vào bài viết của bạn</p>
+                <div className="flex gap-[10px] items-center">
+                  <FontAwesomeIcon
+                    className="text-blue-500 text-3xl hover:cursor-pointer"
+                    icon={faPhotoVideo}
+                  />
+                  <FontAwesomeIcon
+                    className="text-green-500 text-3xl hover:cursor-pointer"
+                    icon={faUserTag}
+                  />
+                  <FontAwesomeIcon
+                    className="text-yellow-400 text-3xl hover:cursor-pointer"
+                    icon={faFaceLaughWink}
+                  />
+                  <FontAwesomeIcon
+                    className="text-red-400 text-3xl hover:cursor-pointer"
+                    icon={faLocationDot}
+                  />
+                  <img className="hover:cursor-pointer" src={gif} alt="gif" />
+                </div>
+              </div>
+              <div className="w-full text-center bg-purple-500 hover:bg-purple-400 transition-colors p-2 rounded-xl text-white">
+                <button>Tiếp tục</button>
+              </div>
             </div>
           </div>
         </div>
@@ -148,7 +183,7 @@ export default function CreatePost() {
               Người có thể xem bài viết
             </h1>
           </div>
-          <div className="overflow-y-auto">
+          <div className="overflow-y-auto ">
             {" "}
             <div className="my-[10px]">
               <p className="font-bold">Ai có thể xem bài viết của bạn?</p>

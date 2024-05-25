@@ -14,6 +14,10 @@ import ProfileFriendList from "./components/Profile/FriendList";
 import Profile from "./components/Profile/Profile";
 import CreatePost from "./components/Profile/CreatePost";
 import DetailPost from "./components/Post/DetailPost";
+import Introduce from "./components/Introduce/Introduce";
+import FriendTab from "./components/FriendTab/FriendTab";
+import AlbumTab from "./components/AlbumTab/AlbumTab";
+import Chatbox from "./components/Chatbox/Chatbox";
 
 function App() {
   return (
@@ -23,6 +27,10 @@ function App() {
           <Route index element={<Home />}></Route>
           <Route path="components" element={<Components />}></Route>
           <Route path="profile" element={<Profile />}></Route>
+          <Route path="about" element={<Introduce />}></Route>
+          <Route path="friends" element={<FriendTab />}></Route>
+          <Route path="album" element={<AlbumTab />}></Route>
+          <Route path="chatbox" element={<Chatbox />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

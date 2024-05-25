@@ -10,10 +10,8 @@ export function Introduction() {
     Relationship: "Độc thân",
   };
 
-
   return (
     <div className="w-[560px] lg:w-[360px] min-h-[350px] bg-white border rounded-xl">
-
       <div className="m-4 flex gap-[10px] flex-col">
         <h1 className="font-bold text-lg">Giới thiệu</h1>
         <button className="w-full p-2 bg-gray-300 rounded-lg text-lg hover:bg-gray-200 transition-colors">
@@ -22,16 +20,16 @@ export function Introduction() {
         <ul className="flex flex-col gap-[5px]">
           {Object.entries(data).map(([key, value]) => (
             <li className="w-full flex" key={key}>
-              {key == "studied_at" && (
+              {key === "studied_at" && (
                 <img className="ml-[4px]" src={Education} alt="" />
               )}
-              {key == "LiveIn" && (
+              {key === "LiveIn" && (
                 <img className="ml-[5px]" src={Home} alt="" />
               )}
-              {key == "ComeFrom" && (
+              {key === "ComeFrom" && (
                 <img className="ml-[5px]" src={Location} alt="" />
               )}
-              {key == "Relationship" && (
+              {key === "Relationship" && (
                 <img className="ml-[2px]" src={YeuThich} alt="" />
               )}
 
