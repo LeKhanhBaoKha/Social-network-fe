@@ -118,10 +118,14 @@ export default function CreatePost() {
             {/* content */}
 
             <div className="">
-              <input
+              <textarea
                 className="focus:outline-none"
+                id="w3review"
+                name="w3review"
+                rows="6"
+                cols="70"
                 placeholder="Bạn đang nghĩ gì?"
-              ></input>
+              ></textarea>
               <div></div>
             </div>
           </div>
