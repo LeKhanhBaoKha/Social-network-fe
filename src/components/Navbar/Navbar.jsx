@@ -8,18 +8,14 @@ import { useState } from 'react';
 import { PopupMesssage } from './PopupMessage';
 import { PopupProfile } from './PopupProfile';
 export const Navbar = () => {
-    const [tabActive, setTabActive] = useState();
-    const handleTabActive = (index) => {
-        console.log(isShowPopup);
-        if(tabActive !== index)
-        {
-            setTabActive(index);
-            setIsShowPopup(true);
-        }
-        else
-        {
-            setIsShowPopup(!isShowPopup);
-        }
+  const [tabActive, setTabActive] = useState();
+  const handleTabActive = (index) => {
+    console.log(isShowPopup);
+    if (tabActive !== index) {
+      setTabActive(index);
+      setIsShowPopup(true);
+    } else {
+      setIsShowPopup(!isShowPopup);
     }
     const [isShowPopup, setIsShowPopup] = useState(false);
     const showPopup = () => {
@@ -67,4 +63,5 @@ export const Navbar = () => {
             </div>
         </div>
     </div>
-}
+  );
+};
