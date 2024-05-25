@@ -2,7 +2,7 @@ import LogoSocial from '@/assets/svg/LogoSocial.svg'
 import MessageIcon from '@/assets/svg/Message2.svg';
 import NotifiIcon from '@/assets/svg/Notify.svg';
 import DropdownIcon from '@/assets/svg/Dropdown.svg';
-import Avatar from '@/assets/images/avatar2.png';
+import Avatar from '@/assets/images/avatar2.png'
 import { PopupNotify } from './PopupNotify';
 import { useState } from 'react';
 import { PopupMesssage } from './PopupMessage';
@@ -17,11 +17,12 @@ export const Navbar = () => {
     } else {
       setIsShowPopup(!isShowPopup);
     }
+  }
     const [isShowPopup, setIsShowPopup] = useState(false);
     const showPopup = () => {
         if(isShowPopup)
             {
-                let className = 'absolute top-[40px] right-[40px] shadow-2xl scrollbar z-[9999] bg-white'
+                let className = 'absolute top-[40px] right-[40px] shadow-2xl scrollbar'
                 switch (tabActive) {
                     case 0 : {
                         return <PopupMesssage className={`${className}`}></PopupMesssage>
@@ -38,7 +39,7 @@ export const Navbar = () => {
                 }
             }
     }
-    return <div className="navbar fixed w-full bg-white flex justify-between px-4 pr-[40px] pt-[12px] pb-[12px] items-center">
+    return ( <div className="navbar flex justify-between px-4 pr-[40px] pt-[12px] pb-[12px] items-center">
         <div className="logo">
             <img src={LogoSocial} alt="Logo mạng xã hội" />
         </div>
@@ -46,11 +47,11 @@ export const Navbar = () => {
             <input className='w-[500px] h-[60px] outline-none bg-slate-100 rounded-[20px] pl-[28px] pr-[28px]' placeholder='Tìm kiếm mọi người, trang, nhóm và hashtag ...' />
         </div>
         <div className='flex items-center gap-[20px]'>
-            <button className="message bg-gradient-to-r from-[#EDFDFF] to-[#A7F5FF] w-[50px] h-[50px] relative rounded-[20px] shrink-0" onClick={() => handleTabActive(0)}>
+            <button className="message bg-gradient-to-r from-[#EDFDFF] to-[#A7F5FF] w-[50px] h-[50px] relative rounded-[20px]" onClick={() => handleTabActive(0)}>
                 <img className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' src={MessageIcon} alt='Tin nhắn' />
                 <button className='badge absolute top-[-5px] right-[1px] bg-[#DE3F4F] w-[20px] h-[20px] rounded-[50%] text-center align-middle text-white text-[12px]'>2</button>
             </button>
-            <button className="notification bg-gradient-to-r from-[#F4FFCA] to-[#E2FA84] w-[50px] h-[50px] relative rounded-[25px] shrink-0" onClick={() => handleTabActive(1)}>
+            <button className="notification bg-gradient-to-r from-[#F4FFCA] to-[#E2FA84] w-[50px] h-[50px] relative rounded-[25px]" onClick={() => handleTabActive(1)}>
                 <img className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' src={NotifiIcon} alt="Thông báo" />
                 <button className='badge absolute top-[-5px] right-[1px] bg-[#DE3F4F] w-[20px] h-[20px] rounded-[50%] text-center align-middle text-white text-[12px] font-semibold'>5+</button>
             </button>
