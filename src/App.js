@@ -14,6 +14,10 @@ import ProfileFriendList from "./components/Profile/FriendList";
 import Profile from "./components/Profile/Profile";
 import CreatePost from "./components/Profile/CreatePost";
 import DetailPost from "./components/Post/DetailPost";
+import { PageLogin } from "./pages/PageLogin";
+import { PageForgotPassword } from "./pages/PageForgotPassword";
+import { PageRegister } from "./pages/PageRegister";
+import { PageTermAndPolicy } from "./pages/PageTermAndPolicy";
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
           <Route path="components" element={<Components />}></Route>
           <Route path="profile" element={<Profile />}></Route>
         </Route>
+        <Route path="auth/login" element={<PageLogin/>}> </Route>
+        <Route path="auth/register" element={<PageRegister/>}> </Route>
+        <Route path="auth/forgot-password" element={<PageForgotPassword/>}> </Route>
+        <Route path="terms-and-policy" element={<PageTermAndPolicy/>}> </Route>
       </Routes>
     </BrowserRouter>
   );
