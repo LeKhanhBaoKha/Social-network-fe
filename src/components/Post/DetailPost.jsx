@@ -13,7 +13,30 @@ import SaveButton from "../../assets/svg/SaveButton.svg";
 import ShareButton from "../../assets/svg/ShareButton.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faShare } from "@fortawesome/free-solid-svg-icons";
-export default function DetailPost() {
+import { format } from "date-fns";
+export default function DetailPost({ post }) {
+  function replaceMonthsToVietnamese(text) {
+    const monthsEnglishToVietnamese = {
+      January: "Tháng Một",
+      February: "Tháng Hai",
+      March: "Tháng Ba",
+      April: "Tháng Tư",
+      May: "Tháng Năm",
+      June: "Tháng Sáu",
+      July: "Tháng Bảy",
+      August: "Tháng Tám",
+      September: "Tháng Chín",
+      October: "Tháng Mười",
+      November: "Tháng Mười Một",
+      December: "Tháng Mười Hai",
+    };
+    const regex = new RegExp(
+      Object.keys(monthsEnglishToVietnamese).join("|"),
+      "gi"
+    );
+    return text.replace(regex, (matched) => monthsEnglishToVietnamese[matched]);
+  }
+
   const reactions = [
     {
       name: "Like",
@@ -47,10 +70,10 @@ export default function DetailPost() {
   return (
     <div className="w-screen h-screen flex lg:flex-row flex-col ">
       {/* Content */}
-      <div className="w-[980px] bg-black flex justify-center">
+      <div className="w-[980px] h-[620px]  bg-black flex justify-center border-r">
         <img
-          className="w-[80%]"
-          src="https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/310065334_1759325007734978_135254363420981357_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=WrgwvE8mNdcQ7kNvgHDAB_7&_nc_ht=scontent.fsgn5-14.fna&oh=00_AYA4QY1-cDpEZPzMrvWgvC_h-L-njCryy3T1AplIQwCAUg&oe=664A5A23"
+          className="w-auto h-auto max-w-full max-h-full object-contain"
+          src={post.post_file}
           alt=""
         />
       </div>
@@ -61,22 +84,25 @@ export default function DetailPost() {
         {/* posthead */}
         <div className="w-[350px] flex justify-between ml-[12px] mt-[11px] bg-white">
           <div className="flex">
-            <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
-              <img
-                className=""
-                src="https://m.media-amazon.com/images/M/MV5BMTc3MzY3MjQ3OV5BMl5BanBnXkFtZTcwODI3NjQxMw@@._V1_.jpg"
-                alt="ảnh đại diện"
-              ></img>
+            <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full bg-gray-100">
+              <img className="" src={post.user.avatar} alt="ảnh đại diện"></img>
             </div>
             <div className="my-[10px] flex flex-col">
-              <p className="">Name</p>
-              <p className="text-sm text-[#66676B]">Hôm qua lúc 14:23</p>
+              <p className="">{post.user.username}v</p>
+              <p className="text-sm text-[#66676B]">
+                {replaceMonthsToVietnamese(
+                  format(post.created_at, "d   MMMM yyyy, h:mm a")
+                )}
+              </p>
             </div>
           </div>
 
           <div className="">
             <img className="mt-[38px] mr-[35px]" src={ThreeDot} alt="" />
           </div>
+        </div>
+        <div className="textContent w-[457px] max-h-[80px] mx-[20px] mb-[10px] overflow-auto">
+          <p>{post.post_text}</p>
         </div>
         {/* end-PostHead */}
         {/* reatcions */}

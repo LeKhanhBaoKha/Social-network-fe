@@ -4,7 +4,7 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import share from "../../assets/svg/Group/ShareButton.svg";
 export default function GroupHeader() {
-  const [activeTab, setActiveTab] = useState("/Home");
+  const [activeTab, setActiveTab] = useState("/Post");
   const location = useLocation();
 
   const tabs = [

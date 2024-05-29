@@ -22,6 +22,7 @@ import Story from "./components/Story/Story";
 import FriendList from "./components/FriendList/FriendList";
 import GroupHeader from "./components/Group/Header";
 import Group from "./components/Group/Group";
+import GlobalPortList from "./components/Post/GlobalPostList";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="story" element={<Story />}></Route>
           <Route path="FriendList" element={<FriendList />}></Route>
           <Route path="Group" element={<Group />}></Route>
+          <Route path="global" element={<GlobalPortList />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

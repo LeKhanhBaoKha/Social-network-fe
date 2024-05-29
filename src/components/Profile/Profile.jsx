@@ -30,12 +30,11 @@ export default function Profile() {
         </div>
         <div className="flex flex-col items-center gap-[10px]">
           <CreatePost />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {/* <Post />
+            <Post />
+            <Post />
+            <Post /> */}
         </div>
-
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import GroupHeader from "./Header";
 
 export default function Group() {
   return (
-    <div>
+    <div className="flex flex-col w-full justify-center items-center">
       <GroupHeader></GroupHeader>
       <GroupIntroduct></GroupIntroduct>
       <GroupMember> </GroupMember>

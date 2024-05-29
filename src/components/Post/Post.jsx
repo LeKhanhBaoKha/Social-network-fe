@@ -20,11 +20,36 @@ import LikeButton from "../../assets/svg/LikeButton.svg";
 import SaveButton from "../../assets/svg/SaveButton.svg";
 import ShareButton from "../../assets/svg/ShareButton.svg";
 import DetailPost from "./DetailPost";
+import { format } from "date-fns";
 
-const Post = () => {
+const Post = ({ post }) => {
+  function replaceMonthsToVietnamese(text) {
+    const monthsEnglishToVietnamese = {
+      January: "Tháng Một",
+      February: "Tháng Hai",
+      March: "Tháng Ba",
+      April: "Tháng Tư",
+      May: "Tháng Năm",
+      June: "Tháng Sáu",
+      July: "Tháng Bảy",
+      August: "Tháng Tám",
+      September: "Tháng Chín",
+      October: "Tháng Mười",
+      November: "Tháng Mười Một",
+      December: "Tháng Mười Hai",
+    };
+    const regex = new RegExp(
+      Object.keys(monthsEnglishToVietnamese).join("|"),
+      "gi"
+    );
+    return text.replace(regex, (matched) => monthsEnglishToVietnamese[matched]);
+  }
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+
+  console.log("Post info", post);
+  console.log("Post user", post.user.username);
 
   const reactions = [
     {
@@ -58,23 +83,21 @@ const Post = () => {
   ];
 
   return (
-
-    <div className="w-[560px] lg:w-[500px]  h-[600px] border rounded-2xl bg-white">
-
+    <div className="w-[560px] lg:w-[500px]   border rounded-2xl bg-white">
       {/* postUser */}
       <div className="postUser flex justify-between ml-[12px] mt-[11px]">
         <div className="flex">
-          <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
-            <img
-              className=""
-              src="https://m.media-amazon.com/images/M/MV5BMTc3MzY3MjQ3OV5BMl5BanBnXkFtZTcwODI3NjQxMw@@._V1_.jpg"
-              alt="ảnh đại diện"
-            ></img>
+          <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full bg-gray-100">
+            <img className="" src={post.user.avatar} alt="ảnh đại diện"></img>
           </div>
 
           <div className="my-[10px] flex flex-col">
-            <p className="">Name</p>
-            <p className="text-sm text-[#66676B]">Hôm qua lúc 14:23</p>
+            <p className="">{post.user.username}</p>
+            <p className="text-sm text-[#66676B]">
+              {replaceMonthsToVietnamese(
+                format(post.created_at, "d   MMMM yyyy, h:mm a")
+              )}
+            </p>
           </div>
         </div>
         <div className="">
@@ -84,14 +107,8 @@ const Post = () => {
       {/* end postUser */}
 
       {/* textContent */}
-      <div className="textContent w-[457px] h-[71px] mx-[20px]">
-        <p>
-          Xin chào mọi người mình là Nguyễn Duy Hiện.
-          <br />
-          Rất vui khi được làm quen với mọi người.
-          <br />
-          <b>#facebook #moichoifacebook #fb #duyhien</b>
-        </p>
+      <div className="textContent w-[457px] max-h-[80px] mx-[20px] overflow-auto">
+        <p>{post.post_text}</p>
       </div>
       {/* endtextContent */}
 
@@ -101,8 +118,7 @@ const Post = () => {
         onClick={onOpenModal}
         className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[400px]"
       >
-
-        <img src={tigerImage} alt="content"></img>
+        <img src={post.post_file} alt="content"></img>
       </div>
       <Modal
         classNames={{
@@ -113,7 +129,7 @@ const Post = () => {
         onClose={onCloseModal}
         center
       >
-        <DetailPost />
+        <DetailPost post={post} />
       </Modal>
       {/* end content */}
 
@@ -136,8 +152,7 @@ const Post = () => {
 
       {/* button */}
 
-      <div className="button w-[524px] lg:w-[464px] h-[44px] flex justify-between text-[#66676B] mx-[17px] border-b">
-
+      <div className="button w-[524px] lg:w-[464px] h-[44px] flex justify-between text-[#66676B] mx-[17px]">
         <div className="w-[111px] h-[30px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
           <button className="flex flex-row gap-[5px]">
             <img src={LikeButton} alt=""></img>
