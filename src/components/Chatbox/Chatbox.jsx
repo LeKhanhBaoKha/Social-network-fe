@@ -145,7 +145,7 @@ export default function Chatbox() {
                 </div>
               </div>
             )}
-            <p className="p-2 max-w-[250px] bg-purple-50 mb-1 rounded-xl">
+            <p className="p-2 max-w-[250px] bg-purple-100 mb-1 rounded-xl">
               {user}:{text}
             </p>
             {user === "Cornor" && (

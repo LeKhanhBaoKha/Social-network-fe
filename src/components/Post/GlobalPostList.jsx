@@ -3,6 +3,7 @@ import Post from "./Post";
 
 export default function GlobalPortList() {
   const [publicPosts, setSublicPosts] = useState();
+  const [postOnlyThatUserCanSee, setPostOnlyThatUserCanSee] = useState();
   useEffect(() => {
     const fetchData = async () => {
       try {

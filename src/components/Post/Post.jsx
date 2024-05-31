@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import "../../assets/scss/components/DetailPost/DetailPost.scss";
+import "../../assets/scss/components/CenterDetailPost/CenterDetailPost.scss";
 import tigerImage from "../../assets/images/tiger.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
@@ -21,6 +22,7 @@ import SaveButton from "../../assets/svg/SaveButton.svg";
 import ShareButton from "../../assets/svg/ShareButton.svg";
 import DetailPost from "./DetailPost";
 import { format } from "date-fns";
+import CenterDetailPost from "./CenterDetailPost";
 
 const Post = ({ post }) => {
   function replaceMonthsToVietnamese(text) {
@@ -47,6 +49,10 @@ const Post = ({ post }) => {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+
+  const [openCenterPost, setOpenCenterPost] = useState(false);
+  const onOpenCenterPost = () => setOpenCenterPost(true);
+  const onCloseCenterPost = () => setOpenCenterPost(false);
 
   console.log("Post info", post);
   console.log("Post user", post.user.username);
@@ -85,7 +91,7 @@ const Post = ({ post }) => {
   return (
     <div className="w-[560px] lg:w-[500px]   border rounded-2xl bg-white">
       {/* postUser */}
-      <div className="postUser flex justify-between ml-[12px] mt-[11px]">
+      <div className=" flex justify-between ml-[12px] mt-[11px]">
         <div className="flex">
           <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full bg-gray-100">
             <img className="" src={post.user.avatar} alt="ảnh đại diện"></img>
@@ -99,6 +105,7 @@ const Post = ({ post }) => {
               )}
             </p>
           </div>
+          <div></div>
         </div>
         <div className="">
           <img className="mt-[38px] mr-[35px]" src={ThreeDot} alt="" />
@@ -159,12 +166,32 @@ const Post = ({ post }) => {
             <p className="text-sm mt-[1px]">Thích</p>
           </button>
         </div>
+
         <div className="w-[111px] h-[30px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
-          <button className="flex flex-row gap-[5px]">
+          <button
+            onClick={onOpenCenterPost}
+            className="flex flex-row gap-[5px]"
+          >
             <img className="mt-[2px]" src={CommentButton} alt=""></img>
             <p className="text-sm mt-[1px]">Bình luận</p>
           </button>
         </div>
+
+        <Modal
+          classNames={{
+            overlay: "",
+            modal: "customModalCenterDetailPost",
+          }}
+          open={openCenterPost}
+          onClose={onCloseCenterPost}
+          center
+        >
+          <CenterDetailPost
+            post={post}
+            changeLanguage={replaceMonthsToVietnamese}
+          />
+        </Modal>
+
         <div className="w-[111px] h-[30px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
           <button className="flex flex-row gap-[5px]">
             <img src={ShareButton} alt=""></img>
