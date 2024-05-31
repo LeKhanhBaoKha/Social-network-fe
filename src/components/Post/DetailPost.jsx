@@ -68,20 +68,18 @@ export default function DetailPost({ post }) {
     },
   ];
   return (
-    <div className="w-screen h-screen flex lg:flex-row flex-col ">
+    <div className="w-[800px] h-screen flex lg:flex-row flex-col ">
       {/* Content */}
-      <div className="w-[980px] h-[620px]  bg-black flex justify-center border-r">
+      <div className="w-[800px] h-[620px] flex justify-center border-r">
         <img
-          className="w-auto h-auto max-w-full max-h-full object-contain"
+          className="w-auto h-auto max-w-full max-h-full object-scale-down"
           src={post.post_file}
           alt=""
         />
       </div>
       {/* end-Content */}
 
-      {/* Post */}
-      <div className="w-[350px] flex flex-col">
-        {/* posthead */}
+      {/* <div className="w-[350px] flex flex-col">
         <div className="w-[350px] flex justify-between ml-[12px] mt-[11px] bg-white">
           <div className="flex">
             <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full bg-gray-100">
@@ -104,8 +102,7 @@ export default function DetailPost({ post }) {
         <div className="textContent w-[457px] max-h-[80px] mx-[20px] mb-[10px] overflow-auto">
           <p>{post.post_text}</p>
         </div>
-        {/* end-PostHead */}
-        {/* reatcions */}
+
         <div className="w-[350px] flex flex-row text-[#66676B] justify-between mx-[17px] pb-[9px] border-b">
           <div className="flex">
             {reactions.map(({ name, svg }) => (
@@ -116,9 +113,7 @@ export default function DetailPost({ post }) {
             <p className="text-sm mt-[1px]">Name và 410 người khác</p>
           </div>
         </div>
-        {/* end reactions */}
 
-        {/* button */}
         <div className="w-[350px] lg:w-[350px] h-[44px] flex justify-between text-[#66676B] mx-[17px] border-b">
           <div className="w-[111px] h-[30px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
             <button className="flex flex-row gap-[5px]">
@@ -149,10 +144,7 @@ export default function DetailPost({ post }) {
             </button>
           </div>
         </div>
-        {/* end button */}
-      </div>
-
-      {/* end-Post */}
+      </div> */}
     </div>
   );
 }

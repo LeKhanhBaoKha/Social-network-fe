@@ -19,6 +19,9 @@ export default function CenterDetailPost({ post, changeLanguage }) {
     autoResize();
   };
 
+  useEffect(() => {
+    textareaRef.current.focus();
+  }, []);
   const autoResize = () => {
     const textarea = textareaRef.current;
     textarea.style.height = "50px";
@@ -35,7 +38,7 @@ export default function CenterDetailPost({ post, changeLanguage }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/comment/getparent"
+          `http://127.0.0.1:8000/api/comment/getparent/${post.id}`
         );
         if (!response.ok) {
           throw new Error(`Error status" ${response.status}`);
@@ -55,8 +58,9 @@ export default function CenterDetailPost({ post, changeLanguage }) {
   useEffect(() => {
     autoResize();
   }, [text]);
+
   return (
-    <div className="w-[720px] max-h-[550px] flex flex-col rounded-lg">
+    <div className="justify-center w-[920px] max-h-[560px] flex flex-col rounded-lg">
       {/* header */}
       <div className="text-center">
         <p className="font-semibold text-lg p-4 border-b">
@@ -65,7 +69,7 @@ export default function CenterDetailPost({ post, changeLanguage }) {
       </div>
       {/* end-header */}
       {/* content */}
-      <div className="flex flex-col w-[720px] overflow-auto">
+      <div className="flex flex-col w-w-[920px] overflow-auto">
         {/* postUser */}
         <div className=" flex justify-between ml-[12px] mt-[11px]">
           <div className="flex">
@@ -163,16 +167,17 @@ export default function CenterDetailPost({ post, changeLanguage }) {
       {/* end-content */}
 
       {/* comment-box */}
-      <div className="min-h-[80px] border-t flex flex-row gap-[10px] items-center px-2">
+      <div className="min-h-[80px] border-t flex flex-row justify-center gap-[10px] items-center px-2">
         <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full bg-gray-100">
           <img className=" " src={post.user.avatar} alt="" />
         </div>
         <textarea
+          autoFocus
           placeholder="Bình luận"
           ref={textareaRef}
           value={text}
           onChange={handleInput}
-          className="p-2 w-[700px] text-base border border-gray-300 resize-none focus:outline-none bg-purple-50  rounded-xl"
+          className="p-2 w-[700px] text-base border border-gray-300 resize-none focus:outline-none bg-purple-50  rounded-xl "
         ></textarea>
         <div className="p-2 rounded-full hover:bg-slate-100 hover:cursor-pointer transition-colors">
           <img className="translate-x-[4px]" src={send} alt="" />

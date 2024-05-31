@@ -169,6 +169,7 @@ export default function Chatbox() {
       <div className="min-h-[60px] border-t flex flex-row gap-[10px] items-center px-2">
         <img className="w-[45px] hover:cursor-pointer" src={upload} alt="" />
         <textarea
+          autoFocus
           ref={textareaRef}
           value={text}
           onChange={handleInput}
