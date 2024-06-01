@@ -158,7 +158,7 @@ export default function CenterDetailPost({ post, changeLanguage }) {
         {/* end button */}
 
         {/* commentlist */}
-        <div className="flex flex-col">
+        <div className="flex flex-col overflow-x-clip mb-[10px]">
           {comments && <CommentList comments={comments}></CommentList>}
         </div>
         {/* end-comment-list */}

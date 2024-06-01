@@ -68,11 +68,11 @@ export default function DetailPost({ post }) {
     },
   ];
   return (
-    <div className="w-[800px] h-screen flex lg:flex-row flex-col ">
+    <div className="w-[900px] h-screen flex justify-center lg:flex-row flex-col ">
       {/* Content */}
-      <div className="w-[800px] h-[620px] flex justify-center border-r">
+      <div className="w-[800px] h-[620px] flex justify-center">
         <img
-          className="w-auto h-auto max-w-full max-h-full object-scale-down"
+          className="w-auto h-auto max-w-full max-h-full object-scale-down g"
           src={post.post_file}
           alt=""
         />

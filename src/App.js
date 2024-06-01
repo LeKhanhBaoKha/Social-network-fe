@@ -23,6 +23,7 @@ import FriendList from "./components/FriendList/FriendList";
 import GroupHeader from "./components/Group/Header";
 import Group from "./components/Group/Group";
 import GlobalPortList from "./components/Post/GlobalPostList";
+import LikeButton from "./components/LikeButton/LikeButton";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="FriendList" element={<FriendList />}></Route>
           <Route path="Group" element={<Group />}></Route>
           <Route path="global" element={<GlobalPortList />}></Route>
+          <Route path="like" element={<LikeButton />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
