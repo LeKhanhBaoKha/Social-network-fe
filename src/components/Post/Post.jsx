@@ -54,9 +54,6 @@ const Post = ({ post }) => {
   const onOpenCenterPost = () => setOpenCenterPost(true);
   const onCloseCenterPost = () => setOpenCenterPost(false);
 
-  console.log("Post info", post);
-  console.log("Post user", post.user.username);
-
   const reactions = [
     {
       name: "Like",

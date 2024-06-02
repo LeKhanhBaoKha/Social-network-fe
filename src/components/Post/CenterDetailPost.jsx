@@ -44,7 +44,7 @@ export default function CenterDetailPost({ post, changeLanguage }) {
           throw new Error(`Error status" ${response.status}`);
         }
         const result = await response.json();
-        setComments(result);
+        setComments(result.data);
       } catch (error) {
         console.error("Error:", error);
       }

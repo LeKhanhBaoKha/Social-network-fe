@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import CommentList from "./CommentList";
 import CommentFrom from "./CommentFrom";
 
-export default function Comment({ comment }) {
+export default function Comment({ comment, depth = 0 }) {
   const [childComment, setChildComment] = useState(null);
   const [text, setText] = useState(comment.content);
   const [showReply, setShowReply] = useState(false);
@@ -40,7 +40,7 @@ export default function Comment({ comment }) {
           throw new Error(`Error status" ${response.status}`);
         }
         const result = await response.json();
-        setChildComment(result);
+        setChildComment(result.data);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -51,6 +51,7 @@ export default function Comment({ comment }) {
     console.log("childcomment", childComment);
     console.log(comment.parent_id);
     console.log(comment.post_id);
+    console.log("depth", depth);
   }
   return (
     <>
@@ -129,9 +130,16 @@ export default function Comment({ comment }) {
           </div>
         )}
         {childComment?.length > 0 && showReply == true && (
-          <div className="pt-[10px] border-l-[4px] translate-x-[8%] ">
+          <div
+            className={` ${
+              depth < 3 ? "pt-[10px] border-l-[4px] translate-x-[8%]" : ""
+            }`}
+          >
             {/* border-l border-b   translate-y-[-50%]  translate-x-[0%] */}
-            <CommentList comments={childComment}></CommentList>
+            <CommentList
+              comments={childComment}
+              depth={depth + 1}
+            ></CommentList>
           </div>
         )}
       </div>
