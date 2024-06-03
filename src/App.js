@@ -20,7 +20,11 @@ import { PageRegister } from "./pages/PageRegister";
 import { PageTermAndPolicy } from "./pages/PageTermAndPolicy";
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer} from 'react-notifications';
-import { PageResetPassword } from "./pages/PageResetPassword";
+import { PageResetPassword } from "./pages/PageResetPassword";import Introduce from "./components/Introduce/Introduce";
+import FriendTab from "./components/FriendTab/FriendTab";
+import AlbumTab from "./components/AlbumTab/AlbumTab";
+import Chatbox from "./components/Chatbox/Chatbox";
+
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +33,10 @@ function App() {
           <Route index element={<Home />}></Route>
           <Route path="components" element={<Components />}></Route>
           <Route path="profile" element={<Profile />}></Route>
+          <Route path="about" element={<Introduce />}></Route>
+          <Route path="friends" element={<FriendTab />}></Route>
+          <Route path="album" element={<AlbumTab />}></Route>
+          <Route path="chatbox" element={<Chatbox />}></Route>
         </Route>
         <Route path="auth/login" element={<PageLogin/>}> </Route>
         <Route path="auth/register" element={<PageRegister/>}> </Route>
