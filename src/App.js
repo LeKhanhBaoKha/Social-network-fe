@@ -18,7 +18,9 @@ import { PageLogin } from "./pages/PageLogin";
 import { PageForgotPassword } from "./pages/PageForgotPassword";
 import { PageRegister } from "./pages/PageRegister";
 import { PageTermAndPolicy } from "./pages/PageTermAndPolicy";
-
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer} from 'react-notifications';
+import { PageResetPassword } from "./pages/PageResetPassword";
 function App() {
   return (
     <BrowserRouter>
@@ -31,8 +33,9 @@ function App() {
         <Route path="auth/login" element={<PageLogin/>}> </Route>
         <Route path="auth/register" element={<PageRegister/>}> </Route>
         <Route path="auth/forgot-password" element={<PageForgotPassword/>}> </Route>
+        <Route path="auth/reset-password" element={<PageResetPassword/>}> </Route>
         <Route path="terms-and-policy" element={<PageTermAndPolicy/>}> </Route>
-      </Routes>
+      </Routes>        <NotificationContainer/>
     </BrowserRouter>
   );
 }
