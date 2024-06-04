@@ -1,4 +1,5 @@
 export const Home = () => {
-    return <div className="page-home h-[1500px]">
+    return <div className="page-home">
+
     </div>
 }
