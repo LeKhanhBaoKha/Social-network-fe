@@ -12,7 +12,7 @@ import ProfileHeader from "./components/Profile/Header";
 import ProfileAlbum from "./components/Profile/Album";
 import ProfileFriendList from "./components/Profile/FriendList";
 import Profile from "./components/Profile/Profile";
-import CreatePost from "./components/Profile/CreatePost";
+import CreatePost from "./components/CreatePost/CreatePost";
 import DetailPost from "./components/Post/DetailPost";
 import Introduce from "./components/Introduce/Introduce";
 import FriendTab from "./components/FriendTab/FriendTab";
@@ -24,6 +24,7 @@ import GroupHeader from "./components/Group/Header";
 import Group from "./components/Group/Group";
 import GlobalPortList from "./components/Post/GlobalPostList";
 import LikeButton from "./components/LikeButton/LikeButton";
+import ThreeDotButton from "./components/ThreedotButton/ThreedotButton";
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
           <Route path="FriendList" element={<FriendList />}></Route>
           <Route path="Group" element={<Group />}></Route>
           <Route path="global" element={<GlobalPortList />}></Route>
-          <Route path="like" element={<LikeButton />}></Route>
+          <Route path="threedot" element={<ThreeDotButton />}></Route>
+          <Route path="create" element={<CreatePost />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

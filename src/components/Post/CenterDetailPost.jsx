@@ -9,8 +9,24 @@ import CommentButton from "../../assets/svg/CommentButton.svg";
 import LikeButton from "../../assets/svg/LikeButton.svg";
 import SaveButton from "../../assets/svg/SaveButton.svg";
 import ShareButton from "../../assets/svg/ShareButton.svg";
-export default function CenterDetailPost({ post, changeLanguage }) {
-  const [comments, setComments] = useState();
+import Batngo from "../../assets/svg/CenterDetailPost/Batngo.svg";
+import Buon from "../../assets/svg/CenterDetailPost/Buon.svg";
+import BuonCuoi from "../../assets/svg/CenterDetailPost/BuonCuoi.svg";
+import PhanNo from "../../assets/svg/CenterDetailPost/PhanNo.svg";
+import Thich from "../../assets/svg/CenterDetailPost/Thich.svg";
+import ThuongThuong from "../../assets/svg/CenterDetailPost/ThuongThuong.svg";
+import YeuThich from "../../assets/svg/CenterDetailPost/YeuThich.svg";
+import DetailPostLikeButton from "../LikeButton/DetailLikeButton";
+import UseFetchParentComment from "../../api/comment/GetParentComment";
+export default function CenterDetailPost({
+  post,
+  changeLanguage,
+  totalComment,
+  likes,
+  icons,
+}) {
+  const totalShare = null;
+  const { parentComment } = UseFetchParentComment(post.id);
   const [text, setText] = useState("");
   const textareaRef = useRef(null);
   const maxHeight = 80;
@@ -34,26 +50,46 @@ export default function CenterDetailPost({ post, changeLanguage }) {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://127.0.0.1:8000/api/comment/getparent/${post.id}`
-        );
-        if (!response.ok) {
-          throw new Error(`Error status" ${response.status}`);
-        }
-        const result = await response.json();
-        setComments(result.data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  const reactions = [
+    {
+      name: "Thích",
+      key: 1,
+      svg: Thich,
+    },
+    {
+      name: "Phẫn nộ",
+      key: 7,
+      svg: PhanNo,
+    },
+    {
+      name: "buồn",
+      key: 6,
+      svg: Buon,
+    },
+    {
+      name: "Yêu thích",
+      key: 3,
+      svg: YeuThich,
+    },
+    {
+      name: "thương thương",
+      key: 4,
+      svg: ThuongThuong,
+    },
+    {
+      name: "bất ngờ",
+      key: 5,
+      svg: Batngo,
+    },
+    {
+      name: "buồn cười",
+      key: 2,
+      svg: BuonCuoi,
+    },
+  ];
 
-  if (comments != null) {
-    console.log(comments);
+  if (parentComment != null) {
+    console.log(parentComment);
   }
   useEffect(() => {
     autoResize();
@@ -63,7 +99,7 @@ export default function CenterDetailPost({ post, changeLanguage }) {
     <div className="justify-center w-[920px] max-h-[560px] flex flex-col rounded-lg">
       {/* header */}
       <div className="text-center">
-        <p className="font-semibold text-lg p-4 border-b">
+        <p className="font-semibold text-xl p-4 border-b">
           Bài viết của {post.user.username}
         </p>
       </div>
@@ -78,7 +114,7 @@ export default function CenterDetailPost({ post, changeLanguage }) {
             </div>
 
             <div className="my-[10px] flex flex-col">
-              <p className="">{post.user.username}</p>
+              <p className="font-semibold text-xl">{post.user.username}</p>
               <p className="text-sm text-[#66676B]">
                 {changeLanguage(
                   format(post.created_at, "d   MMMM yyyy, h:mm a")
@@ -105,17 +141,32 @@ export default function CenterDetailPost({ post, changeLanguage }) {
 
         {/* reatcions */}
         <div className="mt-[10px] reaction flex flex-row text-[#66676B] justify-between mx-[17px] pb-[9px] border-b">
-          <div className="flex">
-            {/* {reactions.map(({ name, svg }) => ( */}
-            <div>
-              <img src="" alt=""></img>
-            </div>
-            {/*   ))} */}
-            <p className="text-sm mt-[1px]"></p>
+          <div className="flex justify-center items-center">
+            {reactions.map(({ name, svg, key }) => (
+              <>
+                {icons != null &&
+                  icons.some((reaction) => reaction.reaction_id === key) && (
+                    <div key={name}>
+                      <img src={svg} alt=""></img>
+                    </div>
+                  )}
+              </>
+            ))}
+            {likes != 0 && likes && (
+              <p className="ml-[10px] text-xl mt-[1px]">{likes} lượt thích</p>
+            )}
           </div>
-          <p className="text-sm mt-[px]">
-            <FontAwesomeIcon icon={faComment} />
-            <FontAwesomeIcon icon={faShare} />
+          <p className="flex flex-row gap-[10px] items-center text-md mt-[px]">
+            {totalComment != 0 && totalComment != null && (
+              <p className="flex items-center gap-[10px] text-xl  ">
+                {totalComment} <FontAwesomeIcon size="xl" icon={faComment} />
+              </p>
+            )}
+            {totalShare != null && totalShare != 0 && (
+              <p className="flex items-center gap-[5px]">
+                {totalShare} <FontAwesomeIcon size="xl" icon={faShare} />
+              </p>
+            )}
           </p>
         </div>
         {/* end reactions */}
@@ -123,14 +174,11 @@ export default function CenterDetailPost({ post, changeLanguage }) {
         {/* button */}
 
         <div className="button h-[44px] flex justify-around text-[#66676B] mx-[17px] mt-[10px]">
-          <div className="w-[160px] h-[36px] mt-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
-            <button className="flex flex-row gap-[5px]">
-              <img className="mt-[5px]" src={LikeButton} alt=""></img>
-              <p className="text-lg font-semibold mt-[1px]">Thích</p>
-            </button>
+          <div className="w-[160px] h-[45px] mt-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
+            <DetailPostLikeButton></DetailPostLikeButton>
           </div>
 
-          <div className="w-[160px] h-[36px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
+          <div className="w-[160px] h-[45px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
             <button className="flex flex-row gap-[5px]">
               <img
                 className="text-lg mt-[8px]"
@@ -141,14 +189,14 @@ export default function CenterDetailPost({ post, changeLanguage }) {
             </button>
           </div>
 
-          <div className="w-[160px] h-[36px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
+          <div className="w-[160px] h-[45px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
             <button className="flex flex-row gap-[5px]">
               <img className="mt-[5px]" src={ShareButton} alt=""></img>
 
               <p className="text-lg font-semibold mt-[1px]">Chia sẻ</p>
             </button>
           </div>
-          <div className="w-[160px] h-[36px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
+          <div className="w-[160px] h-[45px] my-auto flex justify-center items-center hover:bg-[#E6E6E6] transition-all rounded-lg">
             <button className="flex flex-row gap-[5px] ">
               <img className="mt-[8px]" src={SaveButton} alt=""></img>
               <p className="text-lg font-semibold mt-[1px]">Lưu bài</p>
@@ -159,7 +207,9 @@ export default function CenterDetailPost({ post, changeLanguage }) {
 
         {/* commentlist */}
         <div className="flex flex-col overflow-x-clip mb-[10px]">
-          {comments && <CommentList comments={comments}></CommentList>}
+          {parentComment && parentComment != null && (
+            <CommentList comments={parentComment}></CommentList>
+          )}
         </div>
         {/* end-comment-list */}
       </div>

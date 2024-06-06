@@ -1,6 +1,6 @@
 import Post from "../Post/Post";
 import ProfileAlbum from "./Album";
-import CreatePost from "./CreatePost";
+import CreatePost from "../CreatePost/CreatePost";
 import ProfileFriendList from "./FriendList";
 import ProfileHeader from "./Header";
 

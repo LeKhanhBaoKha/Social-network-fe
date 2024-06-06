@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import CommentList from "./CommentList";
 import CommentFrom from "./CommentFrom";
-
+import threedot from "../../assets/svg/Chatbox/ThreeDot.svg";
+import useFetchChildComment from "../../api/comment/GetChildComment";
 export default function Comment({ comment, depth = 0 }) {
-  const [childComment, setChildComment] = useState(null);
+  const { childComment, error, loading } = useFetchChildComment(
+    comment.id,
+    comment.post_id
+  );
   const [text, setText] = useState(comment.content);
   const [showReply, setShowReply] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
@@ -30,23 +34,6 @@ export default function Comment({ comment, depth = 0 }) {
     autoResize();
   }, [text]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://127.0.0.1:8000/api/comment/getchild/${comment.id}/${comment.post_id}`
-        );
-        if (!response.ok) {
-          throw new Error(`Error status" ${response.status}`);
-        }
-        const result = await response.json();
-        setChildComment(result.data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    fetchData();
-  }, []);
   if (childComment) {
     console.log("childcomment", childComment);
     console.log(comment.parent_id);
@@ -73,12 +60,27 @@ export default function Comment({ comment, depth = 0 }) {
           {/* reply text */}
           <div className="mt-[10px]">
             <p className="text-lg font-semibold">{comment.user.username}</p>
-            <textarea
-              ref={textareaRef}
-              value={text}
-              onChange={handleInput}
-              className="p-2 w-[400px] max-w-[500px] text-base border border-gray-300 focus:outline-none bg-purple-50 rounded-xl resize-none pointer-events-none"
-            ></textarea>
+            <div className="flex w-[500px] flex-row items-center gap-[20px] group">
+              <textarea
+                ref={textareaRef}
+                value={text}
+                onChange={handleInput}
+                className="p-2 w-[400px] max-w-[500px] text-base border border-gray-300 focus:outline-none bg-purple-50 rounded-xl resize-none pointer-events-none"
+              ></textarea>
+              <div className="hidden group-hover:flex">
+                <img src={threedot} alt="" />
+              </div>
+            </div>
+
+            {comment.image && (
+              <div className="mt-[10px] ">
+                <img
+                  className="rounded-xl max-w-[450px]"
+                  src={comment.image}
+                  alt=""
+                />
+              </div>
+            )}
 
             {/* comment-button */}
             <div className="flex gap-[10px]">

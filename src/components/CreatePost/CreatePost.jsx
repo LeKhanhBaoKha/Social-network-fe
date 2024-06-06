@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import smile from "../../assets/svg/CreatePost/smile-svgrepo-com.svg";
 import gif from "../../assets/svg/CreatePost/gif-svgrepo-com.svg";
 import "react-responsive-modal/styles.css";
 import "../../assets/scss/components/CreatePost/CreatePost.scss";
 import { Modal } from "react-responsive-modal";
+
 import {
   faCaretDown,
   faCog,
@@ -25,6 +24,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EmojiPicker from "emoji-picker-react";
 
 export default function CreatePost() {
+  const [mediaFiles, setMediaFiles] = useState([]);
+
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -143,6 +144,17 @@ export default function CreatePost() {
                   <FontAwesomeIcon
                     className="text-blue-500 text-3xl hover:cursor-pointer"
                     icon={faPhotoVideo}
+                    onClick={() =>
+                      document.getElementById("media-upload").click()
+                    }
+                  />
+                  <input
+                    type="file"
+                    id="media-upload"
+                    accept="image/*, video/*"
+                    multiple
+                    onChange={(e) => setMediaFiles(e.target.files)}
+                    style={{ display: "none" }}
                   />
                   <FontAwesomeIcon
                     className="text-green-500 text-3xl hover:cursor-pointer"
@@ -192,21 +204,6 @@ export default function CreatePost() {
                 quả tìm kiếm.
               </p>
             </div>
-            {/* <div className="w-[540px] flex items-center justify-between mb-[10px] hover:bg-gray-200 p-4 rounded-xl">
-            <div className="flex gap-[10px]">
-              <div className="bg-gray-300 px-[15px] py-[15px] h-[54px] w-[54px] rounded-full">
-                <FontAwesomeIcon className="text-2xl m-0 p-0" icon={faGlobe} />
-              </div>
-              <div className="flex flex-col">
-                <p className="font-bold">Công khai</p>
-                <p>ai cũng có thể xem</p>
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center h-[26px] w-[26px] border border-blue-500 rounded-full">
-              <div className="h-[18px] w-[18px] rounded-full bg-blue-500"></div>
-            </div>
-          </div> */}
             {audience.map(({ name, key, text, svg }) => (
               <div
                 onClick={() => setAudiencePicker(key)}
