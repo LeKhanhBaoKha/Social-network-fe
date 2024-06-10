@@ -14,7 +14,13 @@ import ProfileFriendList from "./components/Profile/FriendList";
 import Profile from "./components/Profile/Profile";
 import CreatePost from "./components/CreatePost/CreatePost";
 import DetailPost from "./components/Post/DetailPost";
-import Introduce from "./components/Introduce/Introduce";
+import { PageLogin } from "./pages/PageLogin";
+import { PageForgotPassword } from "./pages/PageForgotPassword";
+import { PageRegister } from "./pages/PageRegister";
+import { PageTermAndPolicy } from "./pages/PageTermAndPolicy";
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer} from 'react-notifications';
+import { PageResetPassword } from "./pages/PageResetPassword";import Introduce from "./components/Introduce/Introduce";
 import FriendTab from "./components/FriendTab/FriendTab";
 import AlbumTab from "./components/AlbumTab/AlbumTab";
 import Chatbox from "./components/Chatbox/Chatbox";
@@ -45,7 +51,12 @@ function App() {
           <Route path="threedot" element={<ThreeDotButton />}></Route>
           <Route path="create" element={<CreatePost />}></Route>
         </Route>
-      </Routes>
+        <Route path="auth/login" element={<PageLogin/>}> </Route>
+        <Route path="auth/register" element={<PageRegister/>}> </Route>
+        <Route path="auth/forgot-password" element={<PageForgotPassword/>}> </Route>
+        <Route path="auth/reset-password" element={<PageResetPassword/>}> </Route>
+        <Route path="terms-and-policy" element={<PageTermAndPolicy/>}> </Route>
+      </Routes>        <NotificationContainer/>
     </BrowserRouter>
   );
 }

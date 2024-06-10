@@ -4,6 +4,7 @@ import ForestImage from '@/assets/images/forest.png';
 import ForestAuthumn from '@/assets/images/forestAutumn.png';
 import DaLat from '@/assets/images/dalat.png';
 import { emptyArray } from '../../utils/array';
+import { PopupMessageDetail } from './PopupMessageDetail';
 export const PopupMesssage = ({ className }) => {
     let tabs = ['Tất cả', 'Đã đọc', 'Chưa đọc'];
     const [listMessage, setListMessage] = useState([
@@ -162,7 +163,8 @@ export const PopupMesssage = ({ className }) => {
         setListMessageShow(filterMessage(tabActive))
     }, [])
     const [isOpenSettingMessage, setIsOpenSettingMessage] = useState(false);
-    return <div className={`popup-message h-[600px] w-[400px] px-[20px] py-[12px] pr-[20px] rounded-[20px] overflow-y-auto ${className}`}>
+    return <>
+        <div className={`popup-message h-[600px] w-[400px] px-[20px] py-[12px] pr-[20px] rounded-[20px] overflow-y-auto ${className}`}>
         <div className='flex justify-between'>
             <div className="text-[28px] font-semibold">
                 Tin nhắn
@@ -208,4 +210,5 @@ export const PopupMesssage = ({ className }) => {
             })}
         </div>
     </div>
+    </>
 };
