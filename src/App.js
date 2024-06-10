@@ -12,7 +12,7 @@ import ProfileHeader from "./components/Profile/Header";
 import ProfileAlbum from "./components/Profile/Album";
 import ProfileFriendList from "./components/Profile/FriendList";
 import Profile from "./components/Profile/Profile";
-import CreatePost from "./components/Profile/CreatePost";
+import CreatePost from "./components/CreatePost/CreatePost";
 import DetailPost from "./components/Post/DetailPost";
 import { PageLogin } from "./pages/PageLogin";
 import { PageForgotPassword } from "./pages/PageForgotPassword";
@@ -24,6 +24,13 @@ import { PageResetPassword } from "./pages/PageResetPassword";import Introduce f
 import FriendTab from "./components/FriendTab/FriendTab";
 import AlbumTab from "./components/AlbumTab/AlbumTab";
 import Chatbox from "./components/Chatbox/Chatbox";
+import Story from "./components/Story/Story";
+import FriendList from "./components/FriendList/FriendList";
+import GroupHeader from "./components/Group/Header";
+import Group from "./components/Group/Group";
+import GlobalPortList from "./components/Post/GlobalPostList";
+import LikeButton from "./components/LikeButton/LikeButton";
+import ThreeDotButton from "./components/ThreedotButton/ThreedotButton";
 
 function App() {
   return (
@@ -37,6 +44,12 @@ function App() {
           <Route path="friends" element={<FriendTab />}></Route>
           <Route path="album" element={<AlbumTab />}></Route>
           <Route path="chatbox" element={<Chatbox />}></Route>
+          <Route path="story" element={<Story />}></Route>
+          <Route path="FriendList" element={<FriendList />}></Route>
+          <Route path="Group" element={<Group />}></Route>
+          <Route path="global" element={<GlobalPortList />}></Route>
+          <Route path="threedot" element={<ThreeDotButton />}></Route>
+          <Route path="create" element={<CreatePost />}></Route>
         </Route>
         <Route path="auth/login" element={<PageLogin/>}> </Route>
         <Route path="auth/register" element={<PageRegister/>}> </Route>
