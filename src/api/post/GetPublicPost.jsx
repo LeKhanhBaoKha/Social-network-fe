@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function GetPublicPost() {
   const [publicPosts, setPublicPosts] = useState(null);
@@ -8,15 +9,11 @@ export default function GetPublicPost() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/post/index`);
-      if (!response.ok) {
-        throw new Error(`Error status: ${response.status}`);
-      }
-      const result = await response.json();
-      setPublicPosts(result.data);
+      const response = await axios.get("http://127.0.0.1:8000/api/post/index");
+      setPublicPosts(response.data.data);
     } catch (error) {
       console.error("Error:", error);
-      setError(error.message);
+      setError(error.response ? error.response.data.message : error.message);
     } finally {
       setLoading(false);
     }

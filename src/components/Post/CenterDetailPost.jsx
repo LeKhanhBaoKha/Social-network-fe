@@ -18,6 +18,7 @@ import ThuongThuong from "../../assets/svg/CenterDetailPost/ThuongThuong.svg";
 import YeuThich from "../../assets/svg/CenterDetailPost/YeuThich.svg";
 import DetailPostLikeButton from "../LikeButton/DetailLikeButton";
 import UseFetchParentComment from "../../api/comment/GetParentComment";
+import Carousel from "react-material-ui-carousel";
 export default function CenterDetailPost({
   post,
   changeLanguage,
@@ -134,8 +135,46 @@ export default function CenterDetailPost({
         {/* endtextContent */}
 
         {/* file-content */}
-        <div className="flex justify-center w-full max-h-[400px]">
+        {/* <div className="flex justify-center w-full max-h-[400px]">
           <img className="" src={post.post_file} alt="content"></img>
+        </div> */}
+        <div className="max-h-[450px]">
+          {post?.pictures && (
+            <>
+              <Carousel stopAutoPlayOnHover autoPlay={false}>
+                {post?.pictures.map(({ picture }) => (
+                  // <Item key={i} item={item} />
+                  <>
+                    <div className="flex justify-center w-full max-h-[400px] ">
+                      <img src={picture} alt="content"></img>
+                    </div>
+                  </>
+                ))}
+              </Carousel>
+            </>
+          )}
+
+          {post.videos !== null && (
+            <>
+              <Carousel
+                stopAutoPlayOnHover
+                autoPlay={false}
+                className={`h-[450px] ${
+                  post?.videos.length !== 0 ? "" : "hidden"
+                }`}
+              >
+                {/* video content */}
+                {post?.videos.map(({ video }) => (
+                  <div className="flex justify-center w-full h-full max-h-[420px] ">
+                    <video controls>
+                      <source src={video} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                ))}
+              </Carousel>
+            </>
+          )}
         </div>
         {/* end-file-content */}
 

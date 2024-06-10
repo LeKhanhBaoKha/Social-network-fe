@@ -72,7 +72,7 @@ export default function Comment({ comment, depth = 0 }) {
               </div>
             </div>
 
-            {comment.image && (
+            {comment.image != null && (
               <div className="mt-[10px] ">
                 <img
                   className="rounded-xl max-w-[450px]"

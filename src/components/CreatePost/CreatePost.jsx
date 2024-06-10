@@ -3,7 +3,6 @@ import gif from "../../assets/svg/CreatePost/gif-svgrepo-com.svg";
 import "react-responsive-modal/styles.css";
 import "../../assets/scss/components/CreatePost/CreatePost.scss";
 import { Modal } from "react-responsive-modal";
-
 import {
   faCaretDown,
   faCog,
@@ -25,16 +24,14 @@ import EmojiPicker from "emoji-picker-react";
 
 export default function CreatePost() {
   const [mediaFiles, setMediaFiles] = useState([]);
-
   const [open, setOpen] = useState(false);
+  const [openAudience, setOpenAudience] = useState(false);
+  const [AudiencePicker, setAudiencePicker] = useState("public");
+
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
-
-  const [openAudience, setOpenAudience] = useState(false);
   const onOpenAudience = () => setOpenAudience(true);
   const onCloseAudience = () => setOpenAudience(false);
-
-  const [AudiencePicker, setAudiencePicker] = useState("public");
 
   const audience = [
     {
@@ -76,8 +73,15 @@ export default function CreatePost() {
       svg: <FontAwesomeIcon className="text-2xl m-0 p-0" icon={faCog} />,
     },
   ];
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    const fileURLs = files.map((file) => URL.createObjectURL(file));
+    setMediaFiles(fileURLs);
+  };
+
   return (
-    <div className="flex w-[560px] lg:w-[500px] border bg-white rounded-xl p-1">
+    <div className="flex w-[560px] lg:w-[500px] border bg-white rounded-xl p-1 ">
       <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
         <img
           src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-1/317816571_1806291249705020_3619995257127480928_n.jpg?stp=c0.15.160.160a_dst-jpg_p160x160&_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=LdP56erkWXUQ7kNvgFaf4M_&_nc_ht=scontent.fsgn5-9.fna&oh=00_AYB0VFmnatj5nEwRkHQbkv1A5qymTzlTM2l3AlBZIbk6Iw&oe=66496CDC"
@@ -99,7 +103,7 @@ export default function CreatePost() {
         onClose={onCloseModal}
         center
       >
-        <div className="w-[560px] h-[400px] rounded-xl">
+        <div className="flex items-center justify-center w-[570px] h-[400px] rounded-xl">
           <div className="postUser flex flex-col justify-between">
             {/* header */}
             <div className="font-bold text-xl text-center border-b pb-[10px]">
@@ -128,17 +132,31 @@ export default function CreatePost() {
             {/* content */}
 
             <div className="">
-              <div className="overflow-y-auto">
+              <div className="min-h-[150px] overflow-y-auto ">
                 <textarea
                   className="focus:outline-none text-lg	overflow-y-auto"
                   id="w3review"
                   name="w3review"
-                  rows="5"
+                  rows="3"
                   cols="65"
                   placeholder="Bạn đang nghĩ gì?"
                 ></textarea>
+
+                <div className="w-[560px] flex items-center justify-center flex-wrap gap-2 overflow-y-auto">
+                  {mediaFiles.map((file, index) => (
+                    <div className="">
+                      <img
+                        key={index}
+                        src={file}
+                        alt={`Selected media ${index}`}
+                        className="max-w-[500px] max-h-[500px] rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="flex text-lg justify-between	 items-center w-full mt-[20px] h-[50px] p-4 mb-[20px] border rounded-xl">
+
+              <div className="flex text-lg justify-between items-center w-full mt-[20px] h-[50px] p-4 mb-[20px] border rounded-xl">
                 <p className="font-medium">Thêm vào bài viết của bạn</p>
                 <div className="flex gap-[10px] items-center">
                   <FontAwesomeIcon
@@ -153,7 +171,7 @@ export default function CreatePost() {
                     id="media-upload"
                     accept="image/*, video/*"
                     multiple
-                    onChange={(e) => setMediaFiles(e.target.files)}
+                    onChange={handleFileChange}
                     style={{ display: "none" }}
                   />
                   <FontAwesomeIcon
@@ -171,6 +189,7 @@ export default function CreatePost() {
                   <img className="hover:cursor-pointer" src={gif} alt="gif" />
                 </div>
               </div>
+
               <div className="w-full text-center bg-purple-500 hover:bg-purple-400 transition-colors p-2 rounded-xl text-white">
                 <button>Tiếp tục</button>
               </div>
@@ -196,7 +215,6 @@ export default function CreatePost() {
             </h1>
           </div>
           <div className="overflow-y-auto ">
-            {" "}
             <div className="my-[10px]">
               <p className="font-bold">Ai có thể xem bài viết của bạn?</p>
               <p>

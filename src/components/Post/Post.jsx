@@ -24,7 +24,7 @@ import PostLikeButton from "../LikeButton/LikeButton";
 import ThreeDotButton from "../ThreedotButton/ThreedotButton";
 import WhoLikeYourPost from "../WhoLikeYourPost/WhoLikeYourPost";
 import GetDetails from "../../api/post/GetDetails";
-
+import Carousel from "react-material-ui-carousel";
 const Post = ({ post }) => {
   function replaceMonthsToVietnamese(text) {
     const monthsEnglishToVietnamese = {
@@ -52,9 +52,9 @@ const Post = ({ post }) => {
   console.log("details", details);
   const totalShare = null;
 
-  const [open, setOpen] = useState(false);
-  const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
+  const [open, setOpen] = useState(null);
+  const onOpenModal = (index) => setOpen(index);
+  const onCloseModal = () => setOpen(null);
 
   const [openCenterPost, setOpenCenterPost] = useState(false);
   const onOpenCenterPost = () => {
@@ -147,42 +147,58 @@ const Post = ({ post }) => {
       {/* endtextContent */}
 
       {/* content */}
+      <div className="max-h-[450px]">
+        {post.pictures != null && (
+          <>
+            <Carousel stopAutoPlayOnHover autoPlay={false}>
+              {post?.pictures.map(({ picture, id }) => (
+                // <Item key={i} item={item} />
+                <>
+                  <div
+                    onClick={() => onOpenModal(id)}
+                    className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[450px] "
+                  >
+                    <img src={picture} alt="content"></img>
+                  </div>
+                  <Modal
+                    classNames={{
+                      overlay: "",
+                      modal: "customModalDetailPost",
+                    }}
+                    open={open === id}
+                    onClose={onCloseModal}
+                    center
+                  >
+                    <DetailPost picture={picture} />
+                  </Modal>
+                </>
+              ))}
+            </Carousel>
+          </>
+        )}
 
-      {post.post_file_type === "image" && (
-        <>
-          {/* image content */}
-          <div
-            onClick={onOpenModal}
-            className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[400px]"
-          >
-            <img src={post.post_file} alt="content"></img>
-          </div>
-          <Modal
-            classNames={{
-              overlay: "",
-              modal: "customModalDetailPost",
-            }}
-            open={open}
-            onClose={onCloseModal}
-            center
-          >
-            <DetailPost post={post} />
-          </Modal>
-        </>
-      )}
-
-      {post.post_file_type === "video" && (
-        <>
-          {/* video content */}
-          <div className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[400px]">
-            <video controls>
-              <source src={post.post_file} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </>
-      )}
-
+        {post.videos !== null && (
+          <>
+            <Carousel
+              stopAutoPlayOnHover
+              autoPlay={false}
+              className={`h-[310px] ${
+                post?.videos.length !== 0 ? "" : "hidden"
+              }`}
+            >
+              {/* video content */}
+              {post?.videos.map(({ video }) => (
+                <div className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[400px]">
+                  <video controls>
+                    <source src={video} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              ))}
+            </Carousel>
+          </>
+        )}
+      </div>
       {/* end content */}
 
       {/* reatcions */}
@@ -228,7 +244,7 @@ const Post = ({ post }) => {
           )}
         </div>
         <p className="flex flex-row gap-[10px] items-center text-md mt-[px]">
-          {details?.commentCount != 0 && details?.commentCount != null && (
+          {details?.commentCount != null && (
             <p className="flex items-center gap-[10px] text-xl">
               {details?.commentCount}
               <FontAwesomeIcon size="lg" icon={faComment} />

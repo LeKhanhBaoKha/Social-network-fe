@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function GetDetails(postId) {
   const [details, setDetails] = useState(null);
@@ -8,17 +9,13 @@ export default function GetDetails(postId) {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
+      const response = await axios.get(
         `http://localhost:8000/api/post/smailDetails/${postId}`
       );
-      if (!response.ok) {
-        throw new Error(`Error status: ${response.status}`);
-      }
-      const result = await response.json();
-      setDetails(result.data);
+      setDetails(response.data.data);
     } catch (error) {
       console.error("Error:", error);
-      setError(error.message);
+      setError(error.response ? error.response.data.message : error.message);
     } finally {
       setLoading(false);
     }

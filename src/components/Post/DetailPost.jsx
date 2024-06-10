@@ -14,66 +14,14 @@ import ShareButton from "../../assets/svg/ShareButton.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faShare } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
-export default function DetailPost({ post }) {
-  function replaceMonthsToVietnamese(text) {
-    const monthsEnglishToVietnamese = {
-      January: "Tháng Một",
-      February: "Tháng Hai",
-      March: "Tháng Ba",
-      April: "Tháng Tư",
-      May: "Tháng Năm",
-      June: "Tháng Sáu",
-      July: "Tháng Bảy",
-      August: "Tháng Tám",
-      September: "Tháng Chín",
-      October: "Tháng Mười",
-      November: "Tháng Mười Một",
-      December: "Tháng Mười Hai",
-    };
-    const regex = new RegExp(
-      Object.keys(monthsEnglishToVietnamese).join("|"),
-      "gi"
-    );
-    return text.replace(regex, (matched) => monthsEnglishToVietnamese[matched]);
-  }
-
-  const reactions = [
-    {
-      name: "Like",
-      svg: Thich,
-    },
-    {
-      name: "Phẫn nộ",
-      svg: PhanNo,
-    },
-    {
-      name: "buồn",
-      svg: Buon,
-    },
-    {
-      name: "Yêu thích",
-      svg: YeuThich,
-    },
-    {
-      name: "thương thương",
-      svg: ThuongThuong,
-    },
-    {
-      name: "bất ngờ",
-      svg: Batngo,
-    },
-    {
-      name: "buồn cười",
-      svg: BuonCuoi,
-    },
-  ];
+export default function DetailPost({ picture }) {
   return (
     <div className="w-[900px] h-screen flex justify-center lg:flex-row flex-col ">
       {/* Content */}
       <div className="w-[800px] h-[620px] flex justify-center">
         <img
           className="w-auto h-auto max-w-full max-h-full object-scale-down g"
-          src={post.post_file}
+          src={picture}
           alt=""
         />
       </div>
