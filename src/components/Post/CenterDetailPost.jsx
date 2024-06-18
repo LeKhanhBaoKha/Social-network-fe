@@ -6,7 +6,9 @@ import CommentList from "../Comment/CommentList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faShare } from "@fortawesome/free-solid-svg-icons";
 import CommentButton from "../../assets/svg/CommentButton.svg";
-import LikeButton from "../../assets/svg/LikeButton.svg";
+import * as React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import SaveButton from "../../assets/svg/SaveButton.svg";
 import ShareButton from "../../assets/svg/ShareButton.svg";
 import Batngo from "../../assets/svg/CenterDetailPost/Batngo.svg";
@@ -17,39 +19,44 @@ import Thich from "../../assets/svg/CenterDetailPost/Thich.svg";
 import ThuongThuong from "../../assets/svg/CenterDetailPost/ThuongThuong.svg";
 import YeuThich from "../../assets/svg/CenterDetailPost/YeuThich.svg";
 import DetailPostLikeButton from "../LikeButton/DetailLikeButton";
-import UseFetchParentComment from "../../api/comment/GetParentComment";
 import Carousel from "react-material-ui-carousel";
+import upload from "../../assets/svg/CenterDetailPost/add_photo_alternate_outlined.svg";
+import { NotificationManager } from "react-notifications";
+import APIPost from "../../api/post/APIPost";
+import APIComment from "../../api/comment/APIComment";
+import CommentForm from "../Comment/CommentForm";
+import Comment from "../Comment/Comment";
+
 export default function CenterDetailPost({
   post,
   changeLanguage,
   totalComment,
+  totalShare,
   likes,
   icons,
 }) {
-  const totalShare = null;
-  const { parentComment } = UseFetchParentComment(post.id);
+  const imageUrl = "http://localhost:8000/storage/posts/";
+  const [commentData, setCommentData] = useState({ post_id: post.id });
+  const [parentComment, setParentComment] = useState(null);
+  const [newComment, setNewComment] = useState(null);
+  useEffect(() => {
+    const fetchParent = async () => {
+      try {
+        const response = await APIComment.getParentComment(post.id);
+        // Access the data from the response
+        // console.log("parent comment:", response.data.data);
+        setParentComment(response.data.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    fetchParent();
+  }, []);
+
+  const [data, setData] = useState({ content: "", image: null });
   const [text, setText] = useState("");
   const textareaRef = useRef(null);
   const maxHeight = 80;
-  const handleInput = (e) => {
-    setText(e.target.value);
-    autoResize();
-  };
-
-  useEffect(() => {
-    textareaRef.current.focus();
-  }, []);
-  const autoResize = () => {
-    const textarea = textareaRef.current;
-    textarea.style.height = "50px";
-    const newHeight = textarea.scrollHeight;
-    if (newHeight < maxHeight) {
-      textarea.style.height = `${newHeight}px`;
-    } else {
-      textarea.style.height = `${maxHeight}px`;
-      textarea.style.overflowY = "auto"; // Add scroll if maxHeight is reached
-    }
-  };
 
   const reactions = [
     {
@@ -89,13 +96,11 @@ export default function CenterDetailPost({
     },
   ];
 
-  if (parentComment != null) {
-    console.log(parentComment);
-  }
-  useEffect(() => {
-    autoResize();
-  }, [text]);
+  // useEffect(() => {
+  //   autoResize();
+  // }, [text]);
 
+  console.log("center post", post);
   return (
     <div className="justify-center w-[920px] max-h-[560px] flex flex-col rounded-lg">
       {/* header */}
@@ -138,7 +143,7 @@ export default function CenterDetailPost({
         {/* <div className="flex justify-center w-full max-h-[400px]">
           <img className="" src={post.post_file} alt="content"></img>
         </div> */}
-        <div className="max-h-[450px]">
+        <div className="">
           {post?.pictures && (
             <>
               <Carousel stopAutoPlayOnHover autoPlay={false}>
@@ -146,7 +151,20 @@ export default function CenterDetailPost({
                   // <Item key={i} item={item} />
                   <>
                     <div className="flex justify-center w-full max-h-[400px] ">
-                      <img src={picture} alt="content"></img>
+                      {post.id < 17 && (
+                        <img
+                          className="object-contain"
+                          src={picture}
+                          alt="content"
+                        ></img>
+                      )}
+                      {post.id >= 17 && (
+                        <img
+                          className="object-contain"
+                          src={imageUrl + picture}
+                          alt="content"
+                        ></img>
+                      )}
                     </div>
                   </>
                 ))}
@@ -167,7 +185,7 @@ export default function CenterDetailPost({
                 {post?.videos.map(({ video }) => (
                   <div className="flex justify-center w-full h-full max-h-[420px] ">
                     <video controls>
-                      <source src={video} type="video/mp4" />
+                      <source src={imageUrl + video} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
@@ -245,32 +263,69 @@ export default function CenterDetailPost({
         {/* end button */}
 
         {/* commentlist */}
-        <div className="flex flex-col overflow-x-clip mb-[10px]">
-          {parentComment && parentComment != null && (
-            <CommentList comments={parentComment}></CommentList>
-          )}
-        </div>
+        {parentComment === null && (
+          <div className="flex items-center justify-center mt-[10px]">
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
+          </div>
+        )}
+        {parentComment !== null && (
+          <div className="flex flex-col overflow-x-clip mb-[10px]">
+            {parentComment && parentComment != null && (
+              <CommentList commentsData={parentComment}></CommentList>
+            )}
+          </div>
+        )}
+
         {/* end-comment-list */}
       </div>
 
       {/* end-content */}
 
       {/* comment-box */}
-      <div className="min-h-[80px] border-t flex flex-row justify-center gap-[10px] items-center px-2">
+      <div className="min-h-[80px] border-t flex flex-row justify-center items-center px-2">
         <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full bg-gray-100">
           <img className=" " src={post.user.avatar} alt="" />
         </div>
-        <textarea
-          autoFocus
-          placeholder="Bình luận"
-          ref={textareaRef}
-          value={text}
-          onChange={handleInput}
-          className="p-2 w-[700px] text-base border border-gray-300 resize-none focus:outline-none bg-purple-50  rounded-xl "
-        ></textarea>
-        <div className="p-2 rounded-full hover:bg-slate-100 hover:cursor-pointer transition-colors">
-          <img className="translate-x-[4px]" src={send} alt="" />
-        </div>
+        <CommentForm
+          commentData={commentData}
+          setParentComment={setParentComment}
+          ListOfComments={parentComment}
+          setComments={setParentComment}
+          commentWidth="w-[600px]"
+          post={post}
+          userData={null}
+        ></CommentForm>
+        {/* <form className="flex gap-[5px]" onSubmit={() => handleCreateComment}>
+          <label
+            htmlFor="image-input"
+            className="p-2 rounded-full hover:bg-slate-100 hover:cursor-pointer transition-colors"
+          >
+            <img className="" src={upload} alt="" />
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            id="image-input"
+            onChange={() => handleImageChange}
+            className="hidden"
+          />
+          <textarea
+            autoFocus
+            placeholder="Bình luận"
+            ref={textareaRef}
+            value={text}
+            onChange={handleInput}
+            className="p-2 w-[700px] text-base border border-gray-300 resize-none focus:outline-none bg-purple-50  rounded-xl "
+          ></textarea>
+          <button
+            type="submit"
+            className="p-2 rounded-full hover:bg-slate-100 hover:cursor-pointer transition-colors"
+          >
+            <img className="translate-x-[4px]" src={send} alt="" />
+          </button>
+        </form> */}
       </div>
       {/* end-comment-box */}
     </div>

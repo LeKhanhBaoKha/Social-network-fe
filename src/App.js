@@ -18,9 +18,10 @@ import { PageLogin } from "./pages/PageLogin";
 import { PageForgotPassword } from "./pages/PageForgotPassword";
 import { PageRegister } from "./pages/PageRegister";
 import { PageTermAndPolicy } from "./pages/PageTermAndPolicy";
-import 'react-notifications/lib/notifications.css';
-import {NotificationContainer} from 'react-notifications';
-import { PageResetPassword } from "./pages/PageResetPassword";import Introduce from "./components/Introduce/Introduce";
+import "react-notifications/lib/notifications.css";
+import { NotificationContainer } from "react-notifications";
+import { PageResetPassword } from "./pages/PageResetPassword";
+import Introduce from "./components/Introduce/Introduce";
 import FriendTab from "./components/FriendTab/FriendTab";
 import AlbumTab from "./components/AlbumTab/AlbumTab";
 import Chatbox from "./components/Chatbox/Chatbox";
@@ -31,6 +32,7 @@ import Group from "./components/Group/Group";
 import GlobalPortList from "./components/Post/GlobalPostList";
 import LikeButton from "./components/LikeButton/LikeButton";
 import ThreeDotButton from "./components/ThreedotButton/ThreedotButton";
+import EmojiPickerComponent from "./components/CreatePost/EmojiPicker";
 
 function App() {
   return (
@@ -51,12 +53,23 @@ function App() {
           <Route path="threedot" element={<ThreeDotButton />}></Route>
           <Route path="create" element={<CreatePost />}></Route>
         </Route>
-        <Route path="auth/login" element={<PageLogin/>}> </Route>
-        <Route path="auth/register" element={<PageRegister/>}> </Route>
-        <Route path="auth/forgot-password" element={<PageForgotPassword/>}> </Route>
-        <Route path="auth/reset-password" element={<PageResetPassword/>}> </Route>
-        <Route path="terms-and-policy" element={<PageTermAndPolicy/>}> </Route>
-      </Routes>        <NotificationContainer/>
+        <Route path="auth/login" element={<PageLogin />}>
+          {" "}
+        </Route>
+        <Route path="auth/register" element={<PageRegister />}>
+          {" "}
+        </Route>
+        <Route path="auth/forgot-password" element={<PageForgotPassword />}>
+          {" "}
+        </Route>
+        <Route path="auth/reset-password" element={<PageResetPassword />}>
+          {" "}
+        </Route>
+        <Route path="terms-and-policy" element={<PageTermAndPolicy />}>
+          {" "}
+        </Route>
+      </Routes>{" "}
+      <NotificationContainer />
     </BrowserRouter>
   );
 }

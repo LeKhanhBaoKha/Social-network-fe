@@ -15,13 +15,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faShare } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
 export default function DetailPost({ picture }) {
+  const imageUrl = "http://localhost:8000/storage/posts/";
+
   return (
     <div className="w-[900px] h-screen flex justify-center lg:flex-row flex-col ">
       {/* Content */}
       <div className="w-[800px] h-[620px] flex justify-center">
         <img
           className="w-auto h-auto max-w-full max-h-full object-scale-down g"
-          src={picture}
+          src={imageUrl + picture}
           alt=""
         />
       </div>

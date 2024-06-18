@@ -1,8 +1,8 @@
 import axios from "axios";
-const axiosClient = axios.create({
+const axiosClientFormData = axios.create({
   baseURL: process.env.REACT_APP_BE_BASE_URL,
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
   },
   withCredentials: true,
   timeout: 30000,
@@ -35,4 +35,4 @@ axios.interceptors.response.use(
     // return error;
   }
 );
-export default axiosClient;
+export default axiosClientFormData;

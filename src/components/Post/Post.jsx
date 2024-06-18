@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import "../../assets/scss/components/DetailPost/DetailPost.scss";
@@ -25,7 +25,10 @@ import ThreeDotButton from "../ThreedotButton/ThreedotButton";
 import WhoLikeYourPost from "../WhoLikeYourPost/WhoLikeYourPost";
 import GetDetails from "../../api/post/GetDetails";
 import Carousel from "react-material-ui-carousel";
-const Post = ({ post }) => {
+import LazyLoad from "react-lazy-load";
+
+const Post = ({ postData }) => {
+  const imageUrl = "http://localhost:8000/storage/posts/";
   function replaceMonthsToVietnamese(text) {
     const monthsEnglishToVietnamese = {
       January: "Tháng Một",
@@ -47,11 +50,7 @@ const Post = ({ post }) => {
     );
     return text.replace(regex, (matched) => monthsEnglishToVietnamese[matched]);
   }
-
-  const { details } = GetDetails(post.id);
-  console.log("details", details);
-  const totalShare = null;
-
+  const [post, setPost] = useState(postData);
   const [open, setOpen] = useState(null);
   const onOpenModal = (index) => setOpen(index);
   const onCloseModal = () => setOpen(null);
@@ -106,6 +105,10 @@ const Post = ({ post }) => {
 
   const postOptions = [
     {
+      name: "Chỉnh sửa",
+      key: "edit",
+    },
+    {
       name: "Ẩn bài viết",
       key: "hidden",
     },
@@ -115,6 +118,7 @@ const Post = ({ post }) => {
     },
   ];
 
+  // console.log(post);
   return (
     <div className="w-[560px] lg:w-[500px]   border rounded-2xl bg-white">
       {/* postUser */}
@@ -135,7 +139,11 @@ const Post = ({ post }) => {
           <div></div>
         </div>
         <div className=" mr-[25px]">
-          <ThreeDotButton options={postOptions} post={post}></ThreeDotButton>
+          <ThreeDotButton
+            options={postOptions}
+            post={post}
+            setPost={setPost}
+          ></ThreeDotButton>
         </div>
       </div>
       {/* end postUser */}
@@ -147,20 +155,37 @@ const Post = ({ post }) => {
       {/* endtextContent */}
 
       {/* content */}
-      <div className="max-h-[450px]">
+      <div className="max-h-[1300px] overflow-auto">
         {post.pictures != null && (
-          <>
+          <div className="max-h-[500px]">
             <Carousel stopAutoPlayOnHover autoPlay={false}>
               {post?.pictures.map(({ picture, id }) => (
                 // <Item key={i} item={item} />
-                <>
-                  <div
-                    onClick={() => onOpenModal(id)}
-                    className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[450px] "
-                  >
-                    <img src={picture} alt="content"></img>
-                  </div>
+                <div key={id}>
+                  <LazyLoad offset={100}>
+                    <div
+                      onClick={() => onOpenModal(id)}
+                      className="flex justify-center my-[13px] content max-w-[560px] max-h-[430px] "
+                    >
+                      {post.id < 17 && (
+                        <img
+                          className="object-contain"
+                          src={picture}
+                          alt="content"
+                        ></img>
+                      )}
+                      {post.id >= 17 && (
+                        <img
+                          className="object-contain"
+                          src={imageUrl + picture}
+                          alt="content"
+                        ></img>
+                      )}
+                    </div>
+                  </LazyLoad>
+
                   <Modal
+                    key={id}
                     classNames={{
                       overlay: "",
                       modal: "customModalDetailPost",
@@ -171,32 +196,39 @@ const Post = ({ post }) => {
                   >
                     <DetailPost picture={picture} />
                   </Modal>
-                </>
-              ))}
-            </Carousel>
-          </>
-        )}
-
-        {post.videos !== null && (
-          <>
-            <Carousel
-              stopAutoPlayOnHover
-              autoPlay={false}
-              className={`h-[310px] ${
-                post?.videos.length !== 0 ? "" : "hidden"
-              }`}
-            >
-              {/* video content */}
-              {post?.videos.map(({ video }) => (
-                <div className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[400px]">
-                  <video controls>
-                    <source src={video} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
                 </div>
               ))}
             </Carousel>
-          </>
+          </div>
+        )}
+
+        {post.videos !== null && (
+          <div className="max-h-[600px]">
+            <Carousel
+              indicators={true}
+              stopAutoPlayOnHover
+              autoPlay={false}
+              key={post.videos.length}
+              className={`h-[310px] ${
+                post.videos.length !== 0 ? "" : "hidden"
+              }`}
+            >
+              {/* video content */}
+              {post.videos.map(({ video }, index) => (
+                <LazyLoad offset={100}>
+                  <div
+                    key={index}
+                    className="flex justify-center my-[13px] content max-w-[560px] lg:max-w-[500px] max-h-[300px]"
+                  >
+                    <video controls>
+                      <source src={imageUrl + video} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </LazyLoad>
+              ))}
+            </Carousel>
+          </div>
         )}
       </div>
       {/* end content */}
@@ -206,8 +238,8 @@ const Post = ({ post }) => {
         <div className="flex items-center">
           {reactions.map(({ name, svg, key }) => (
             <>
-              {details?.topReactions &&
-                details?.topReactions.some(
+              {post?.topReactions &&
+                post?.topReactions.some(
                   (reaction) => reaction.reaction_id === key
                 ) && (
                   <div key={name}>
@@ -216,16 +248,16 @@ const Post = ({ post }) => {
                 )}
             </>
           ))}
-          {details?.numberOfLike != 0 && details?.numberOfLike && (
+          {post?.numberOfLike != 0 && post?.numberOfLike && (
             // likes-modal
             <>
               <p
                 onClick={onOpenLikeModal}
                 className="text-xl mt-[1px] hover:cursor-pointer"
               >
-                {details?.numberOfLike} lượt thích
+                {post?.numberOfLike} lượt thích
               </p>
-              {details?.usersWhoLikeYourPost && (
+              {post?.usersWhoLikeYourPost && (
                 <Modal
                   classNames={{
                     overlay: "",
@@ -236,7 +268,7 @@ const Post = ({ post }) => {
                   center
                 >
                   <WhoLikeYourPost
-                    postReactions={details?.usersWhoLikeYourPost}
+                    postReactions={post?.usersWhoLikeYourPost}
                   ></WhoLikeYourPost>
                 </Modal>
               )}
@@ -244,15 +276,15 @@ const Post = ({ post }) => {
           )}
         </div>
         <p className="flex flex-row gap-[10px] items-center text-md mt-[px]">
-          {details?.commentCount != null && (
+          {post?.commentCount != null && (
             <p className="flex items-center gap-[10px] text-xl">
-              {details?.commentCount}
+              {post?.commentCount}
               <FontAwesomeIcon size="lg" icon={faComment} />
             </p>
           )}
-          {totalShare != 0 && totalShare != null && (
+          {post?.numberOfShare != 0 && post?.numberOfShare != null && (
             <p>
-              {totalShare} <FontAwesomeIcon icon={faShare} />
+              {post?.numberOfShare} <FontAwesomeIcon icon={faShare} />
             </p>
           )}
         </p>
@@ -287,9 +319,10 @@ const Post = ({ post }) => {
         >
           <CenterDetailPost
             post={post}
-            totalComment={details?.commentCount}
-            likes={details?.numberOfLike}
-            icons={details?.topReactions}
+            totalComment={post?.commentCount}
+            likes={post?.numberOfLike}
+            icons={post?.topReactions}
+            totalShare={post?.numberOfShare}
             changeLanguage={replaceMonthsToVietnamese}
           />
         </Modal>
