@@ -24,8 +24,8 @@ export default function CommentForm({
     isReplying !== true ? comment?.content : null
   );
   console.log("Comment data", comment);
-  console.log("isEdit", isEdit);
-  console.log("isreply", isReplying !== true ? comment?.content : null);
+  // console.log("isEdit", isEdit);
+  // console.log("isreply", isReplying !== true ? comment?.content : null);
   const [data, setData] = useState({
     post_id: null,
     parent_id: null,
@@ -85,20 +85,8 @@ export default function CommentForm({
           const response = await APIComment.createComment(data);
           if (response?.data?.meta?.statusCode === 200) {
             NotificationManager.success(response?.data?.meta?.message);
-            setComments([...ListOfComments, data]);
             setIsReplying(false);
-
-            // setNewComment(response?.data?.data);
-            // const fetchParent = async () => {
-            //   try {
-            //     const response = await APIComment.getParentComment(post.id);
-            //     // Access the data from the response
-            //     setParentComment(response.data.data);
-            //   } catch (error) {
-            //     console.error("Error:", error);
-            //   }
-            // };
-            // fetchParent();
+            setComments([...ListOfComments, response?.data?.data]);
           } else {
             NotificationManager.error(response?.data?.meta?.message);
           }

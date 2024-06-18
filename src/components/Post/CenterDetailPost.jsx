@@ -297,35 +297,6 @@ export default function CenterDetailPost({
           post={post}
           userData={null}
         ></CommentForm>
-        {/* <form className="flex gap-[5px]" onSubmit={() => handleCreateComment}>
-          <label
-            htmlFor="image-input"
-            className="p-2 rounded-full hover:bg-slate-100 hover:cursor-pointer transition-colors"
-          >
-            <img className="" src={upload} alt="" />
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            id="image-input"
-            onChange={() => handleImageChange}
-            className="hidden"
-          />
-          <textarea
-            autoFocus
-            placeholder="Bình luận"
-            ref={textareaRef}
-            value={text}
-            onChange={handleInput}
-            className="p-2 w-[700px] text-base border border-gray-300 resize-none focus:outline-none bg-purple-50  rounded-xl "
-          ></textarea>
-          <button
-            type="submit"
-            className="p-2 rounded-full hover:bg-slate-100 hover:cursor-pointer transition-colors"
-          >
-            <img className="translate-x-[4px]" src={send} alt="" />
-          </button>
-        </form> */}
       </div>
       {/* end-comment-box */}
     </div>

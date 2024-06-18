@@ -58,12 +58,12 @@ export default function Comment({
       key: "delete",
     },
   ];
-  if (childComment) {
-    console.log("childcomment", childComment);
-    console.log(comment?.parent_id);
-    console.log(comment?.post_id);
-    console.log("depth", depth);
-  }
+  // if (childComment) {
+  //   console.log("childcomment", childComment);
+  //   console.log(comment?.parent_id);
+  //   console.log(comment?.post_id);
+  //   console.log("depth", depth);
+  // }
   return (
     <>
       {comment != null && (
