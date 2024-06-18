@@ -86,7 +86,7 @@ export default function Chatbox() {
     autoResize();
   }, [text]);
   return (
-    <div className="w-[385px] h-[500px] border rounded-lg flex flex-col">
+    <div className="w-[360px] h-[500px] border rounded-lg flex flex-col">
       {/* header */}
       <div className="flex flex-row p-2 justify-between border-b h-[70px]">
         <div className="flex flex-row gap-[10px] hover:cursor-pointer">
@@ -133,31 +133,31 @@ export default function Chatbox() {
             } "`}
           >
             {user === "Sarah" && (
-              <div className="flex flex-row items-center gap-[8px] px-1">
-                <div className="">
+              <div className="flex flex-row items-center px-1">
+                <div className="p-1  rounded-full hover:bg-purple-100 transition-colors">
                   <img src={threedot} alt="" />
                 </div>
-                <div className="">
+                <div className="p-1 rounded-full hover:bg-purple-100 transition-colors">
                   <img className="transform scale-x-[-1]" src={share} alt="" />
                 </div>
-                <div className="">
+                <div className="p-1  rounded-full hover:bg-purple-100 transition-colors">
                   <img src={smile} alt="" />
                 </div>
               </div>
             )}
-            <p className="p-2 max-w-[250px] bg-purple-50 mb-1 rounded-xl">
+            <p className="p-2 max-w-[250px] bg-purple-100 mb-1 rounded-xl">
               {user}:{text}
             </p>
             {user === "Cornor" && (
               <div className="flex flex-row items-center px-1">
-                <div className="p-2  rounded-full hover:bg-purple-100 transition-colors">
+                <div className="p-1  rounded-full hover:bg-purple-100 transition-colors">
                   <img src={smile} alt="" />
                 </div>
-                <div className="p-2 rounded-full hover:bg-purple-100 transition-colors">
+                <div className="p-1 rounded-full hover:bg-purple-100 transition-colors">
                   <img className="transform scale-x-[-1]" src={share} alt="" />
                 </div>
 
-                <div className="p-2 rounded-full hover:bg-purple-100 transition-colors">
+                <div className="p-1 rounded-full hover:bg-purple-100 transition-colors">
                   <img src={threedot} alt="" />
                 </div>
               </div>
@@ -169,6 +169,7 @@ export default function Chatbox() {
       <div className="min-h-[60px] border-t flex flex-row gap-[10px] items-center px-2">
         <img className="w-[45px] hover:cursor-pointer" src={upload} alt="" />
         <textarea
+          autoFocus
           ref={textareaRef}
           value={text}
           onChange={handleInput}

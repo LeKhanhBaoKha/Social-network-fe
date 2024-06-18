@@ -1,6 +1,6 @@
 import Post from "../Post/Post";
 import ProfileAlbum from "./Album";
-import CreatePost from "./CreatePost";
+import CreatePost from "../CreatePost/CreatePost";
 import ProfileFriendList from "./FriendList";
 import ProfileHeader from "./Header";
 
@@ -30,12 +30,11 @@ export default function Profile() {
         </div>
         <div className="flex flex-col items-center gap-[10px]">
           <CreatePost />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {/* <Post />
+            <Post />
+            <Post />
+            <Post /> */}
         </div>
-
       </div>
     </div>
   );
