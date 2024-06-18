@@ -7,8 +7,10 @@ import { PopupNotify } from './PopupNotify';
 import { useState } from 'react';
 import { PopupMesssage } from './PopupMessage';
 import { PopupProfile } from './PopupProfile';
+import { useSelector } from 'react-redux';
 export const Navbar = () => {
   const [tabActive, setTabActive] = useState();
+  const userInfo = useSelector(state => state?.user?.userInfo)
   const handleTabActive = (index) => {
     console.log(isShowPopup);
     if (tabActive !== index) {
@@ -39,6 +41,7 @@ export const Navbar = () => {
                 }
             }
     }
+    console.log(userInfo);
     return ( <div className="navbar flex justify-between px-4 pr-[40px] pt-[12px] pb-[12px] items-center">
         <div className="logo">
             <img src={LogoSocial} alt="Logo mạng xã hội" />
@@ -56,8 +59,8 @@ export const Navbar = () => {
                 <button className='badge absolute top-[-5px] right-[1px] bg-[#DE3F4F] w-[20px] h-[20px] rounded-[50%] text-center align-middle text-white text-[12px] font-semibold'>5+</button>
             </button>
             <button className="avatar flex items-center gap-[15px]" onClick={() => handleTabActive(2)}>
-                <img src={Avatar} alt='Ảnh đại diện' className='w-[50px] h-[50px] rounded-[50%]'/>
-                <div className='font-semibold'>Chào, Hiện !<img className='inline-block ml-[15px]' src={DropdownIcon} alt='' /></div>
+                <img src={userInfo?.avatar || Avatar} alt='Ảnh đại diện' className='w-[50px] h-[50px] rounded-[50%]'/>
+                <div className='font-semibold'>Chào, {userInfo?.last_name} !<img className='inline-block ml-[15px]' src={DropdownIcon} alt='' /></div>
             </button>
             <div className='relative'>
             {showPopup()}

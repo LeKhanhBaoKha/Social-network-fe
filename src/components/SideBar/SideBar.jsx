@@ -12,7 +12,6 @@ const SideBar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.pathname);
     setActiveTab(location.pathname);
   }, [activeTab]);
   const tabs = [
