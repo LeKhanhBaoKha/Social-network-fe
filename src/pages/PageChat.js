@@ -1,16 +1,21 @@
-import { ListChat } from "../components/Chat/ListChat";
+import { Chat } from "../components/Chat/Chat"
 import Echo from 'laravel-echo';
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import io from 'socket.io-client';
-import { updateEcho } from "../app/echoSlice";
-let usersOnline = [];
-let selectedUser;
-export const Home = () => {
+// import io from 'socket.io-client';
+// let usersOnline = [];
+// let selectedUser;
+// window.io = io;
+export const PageChat = () => {
     // useEffect(() => {
     //     const echo = new Echo({
     //         broadcaster: 'socket.io',
+    //         // host: `${window.location.protocol}//${window.location.hostname}:6001`,
     //         host: `${window.location.hostname}:6001`,
+    //         // transports: ["websocket"],
+    //         // withCredentials: true, // Gửi các cookie
+    //         // enabledTransports: ['ws', 'wss'],
+    //         // transports: ["websocket", "polling", "flashsocket"],
+    //         // transports: ["polling"],
     //     });
     //       echo?.private(`room.1`)
     //       .listen('MessagePosted', (e) => {
@@ -18,13 +23,11 @@ export const Home = () => {
     //         // this.scrollToBottom(document.getElementById('shared_room'), true);
     //         console.log("Tin nhắn tới nek", e.message);
     //       })  
-    //       // Tham gia phòng có tên là room1
+    //       // 
     //       echo?.join(`room.1`)
-    //       // Hiển thị các người dùng đang có trong phòng
     //       .here((users) => {
     //         console.log(users);
     //       })
-    //       // Khi có người dùng mới tham gia vào phồng
     //       .joining((user) => {
     //         usersOnline.value.push(user);
     //         console.log(user);
@@ -32,7 +35,6 @@ export const Home = () => {
     //           selectedUser.value.isOnline = true;
     //         }
     //       })
-    //       // Khi một người rời khỏi phòng
     //       .leaving((user) => {
     //         const index = usersOnline.value.findIndex(
     //           (item) => item.id === user.id
@@ -46,9 +48,6 @@ export const Home = () => {
     //         }
     //         console.log(user);
     //       });
-    //       echo.private(`room.1`).listen("MessagePosted", (e) => {
-    //         console.log('Tin nhắn tới kìa bay', e.message);
-    //       });
     //       return () => {
             
     //         // Hủy kết nối echo khi component unmount
@@ -57,10 +56,7 @@ export const Home = () => {
     //         // echo?.disconnect();
     //       };
     //     }, []);
-    return <>
-        <div className="page-home">
-        
-        </div>
-    <ListChat></ListChat>
+            return <>
+        <h1>Xin chào</h1>
     </>
 }

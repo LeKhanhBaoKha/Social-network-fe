@@ -1,15 +1,18 @@
 import GoogleIcon from "@/assets/svg/Google.svg";
 import ClapIcon from "@/assets/svg/Clap.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { NotificationManager } from 'react-notifications';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import APIAuth from "../../api/APIAuth";
+import { useDispatch } from "react-redux";
+import { login } from "../../app/userSlice";
 
 export const FormLogin = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [dataLogin, setDataLogin] = useState("");
     // tạo schema để validate
     const schema = yup.object({
@@ -29,16 +32,17 @@ export const FormLogin = () => {
         setDataLogin({ ...dataLogin, [name]: value })
     }
     const handleLogin = async () => {
-        try {
-            const response = await APIAuth.login(dataLogin);
-            if (response?.data?.meta?.statusCode === 200) {
-                NotificationManager.success(response?.data?.meta?.message);
-            } else {
-            }
-        } catch (error) {
-            NotificationManager.error(error?.response?.data?.meta?.message);
-            console.error('Error:', error);
-        }
+        dispatch(login(dataLogin))
+        .unwrap()
+        .then(() => {
+          // Xử lý thành công đăng nhập
+          navigate('/');
+        })
+        .catch((error) => {
+          // Xử lý lỗi đăng nhập
+          console.error('Lỗi đăng nhập:', error);
+        });
+  
     }
     useEffect(() => {
         setFocus('email');

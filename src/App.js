@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom/dist";
 import { Home } from "./pages/Home";
 import { Layout } from "./layout/Layout";
 import { Components } from "./pages/Conponents";
+import "@/assets/scss/app.scss";
 import "@/assets/scss/master.scss";
 import { Introduction } from "./components/Profile/Introduction";
 import ProfileHeader from "./components/Profile/Header";
@@ -31,8 +32,47 @@ import Group from "./components/Group/Group";
 import GlobalPortList from "./components/Post/GlobalPostList";
 import LikeButton from "./components/LikeButton/LikeButton";
 import ThreeDotButton from "./components/ThreedotButton/ThreedotButton";
-
+import { PageChat } from "./pages/PageChat";
+import { useEffect } from "react";
+import Echo from "laravel-echo";
+import io from 'socket.io-client';
+import { useDispatch, useSelector } from "react-redux";
+import { updateEcho } from "./app/echoSlice";
+window.io = io;
 function App() {
+  const dispatch = useDispatch();
+  const echoObject = useSelector(state => state.echo?.echoObject);
+    useEffect(() => {
+          // echoObject?.private(`room.1`)
+          // .listen('MessagePosted', (e) => {
+          //   console.log(e.message);
+          //   // this.messages.push(e.message)
+          //   // this.scrollToBottom(document.getElementById('shared_room'), true);
+          // })  
+          // // Tham gia phòng có tên là room1
+          // echoObject?.join(`room.1`)
+          // // Hiển thị các người dùng đang có trong phòng
+          // .here((users) => {
+          //   // console.log(users);
+          // })
+          // // Khi có người dùng mới tham gia vào phồng
+          // .joining((user) => {
+          // })
+          // // Khi một người rời khỏi phòng
+          // .leaving((user) => {
+          //   console.log(user);
+          // });
+          echoObject.private(`room.1`).listen("MessagePosted", (data) => {
+            console.log('Tin nhắn tới kìa bay', data);
+          });
+          return () => {
+            
+            // Hủy kết nối echoObject khi component unmount
+            echoObject.leave(`room.1`);
+
+            // echoObject?.disconnect();
+          };
+        }, []);
   return (
     <BrowserRouter>
       <Routes>
@@ -50,6 +90,7 @@ function App() {
           <Route path="global" element={<GlobalPortList />}></Route>
           <Route path="threedot" element={<ThreeDotButton />}></Route>
           <Route path="create" element={<CreatePost />}></Route>
+          <Route path="chat" element={<PageChat />}></Route>
         </Route>
         <Route path="auth/login" element={<PageLogin/>}> </Route>
         <Route path="auth/register" element={<PageRegister/>}> </Route>

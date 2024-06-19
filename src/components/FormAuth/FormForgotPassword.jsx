@@ -44,7 +44,7 @@ export const FormForgotPassword = () => {
     useEffect(() => {
         setFocus('email');
     }, []);
-    console.log(dataForgotPassword);
+    // console.log(dataForgotPassword);
     return <>
         <div className="flex flex-col min-h-[calc(100%-60px)] m-auto w-[600px] border border-sky-300 rounded-[40px] p-[20px] px-[30px]">
             <div className="flex justify-center items-center gap-[8px]">

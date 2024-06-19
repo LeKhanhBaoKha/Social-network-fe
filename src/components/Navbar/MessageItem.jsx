@@ -10,8 +10,8 @@ import OnlineIcon from '@/assets/svg/Online.svg';
 import ForestImage from '@/assets/images/forest.png';
 import ThreeDotIcon from '@/assets/svg/ThreeDot.svg';
 import { useState } from 'react';
-export const MesasgeItem = ({ dataMessage }) => {
-    const idUserCurrent = 2;
+import { useSelector } from 'react-redux';
+export const MesasgeItem = ({ dataMessage, userCurrentId }) => {
     const listActionMessage = [
         {
             text: 'Bày tỏ cảm xúc',
@@ -35,9 +35,9 @@ export const MesasgeItem = ({ dataMessage }) => {
         setIsShowActionMessagee(false)
     };
     const showComponent = () => {
-        if (dataMessage.idSent !== idUserCurrent) {
+        if (dataMessage.user_id_from !== userCurrentId) {
             return <div className='flex items-center gap-[7px]  mt-[10px]' onMouseEnter={handleMouseEnterMessageItem} onMouseLeave={handleMouseLeaveMessageItem}>
-                <img className='h-[30px] w-[30px] rounded-[50%]' src={dataMessage?.avatar} alt="" />
+                <img className='h-[30px] w-[30px] rounded-[50%]' src={dataMessage?.user?.avatar} alt="" />
                 <div className='max-w-[55%] bg-[#F0F0F0] py-[8px] px-[13px] rounded-[18px]'>
                     {dataMessage?.content}
                 </div>
@@ -58,7 +58,7 @@ export const MesasgeItem = ({ dataMessage }) => {
                 <div className='max-w-[55%] bg-[#0084ff] text-white py-[8px] px-[13px] rounded-[18px]'>
                     {dataMessage?.content}
                 </div>
-                <img className='h-[30px] w-[30px] rounded-[50%]' src={dataMessage?.avatar} alt="" />
+                <img className='h-[30px] w-[30px] rounded-[50%]' src={dataMessage?.user?.avatar} alt="" />
             </div>
         }
     }
