@@ -5,6 +5,7 @@ import threedot from "../../assets/svg/Chatbox/ThreeDot.svg";
 import useFetchChildComment from "../../api/comment/GetChildComment";
 import APIComment from "../../api/comment/APIComment";
 import ThreeDotComment from "../ThreedotButton/ThreedotButtonComment";
+import CommentLikeButton from "../LikeButton/CommentLikeButton";
 export default function Comment({
   commentData,
   depth = 0,
@@ -15,10 +16,15 @@ export default function Comment({
 }) {
   // console.log("commentData", commentData);
   const [childComment, setChildComment] = useState(children);
+  const imageUrl = "http://localhost:8000/storage/posts/";
+
   // console.log("children in comment", children);
   // const [newComment, setNewComment] = useState([]);
   // console.log("new comment", newComment);
   const [comment, setComment] = useState(commentData);
+  useEffect(() => {
+    setComment(commentData);
+  }, [commentData]);
   const [edit, setEdit] = useState(false);
   const [showReply, setShowReply] = useState(false);
   const [text, setText] = useState(comment?.content);
@@ -75,7 +81,11 @@ export default function Comment({
                 <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full bg-gray-100">
                   <img
                     className=""
-                    src={comment?.user?.avatar}
+                    src={
+                      comment?.user?.avatar.includes("http")
+                        ? comment?.user?.avatar
+                        : imageUrl + comment?.user?.avatar
+                    }
                     alt="ảnh đại diện"
                   ></img>
                 </div>
@@ -84,7 +94,9 @@ export default function Comment({
             {/* end postUser */}
             {/* reply text */}
             <div className="mt-[10px]">
-              <p className="text-lg font-semibold">{comment?.user?.username}</p>
+              <p className="text-lg font-semibold">
+                {comment?.user?.first_name + " " + comment?.user?.last_name}
+              </p>
               <div className="flex w-[900px] flex-row items-center gap-[20px] group">
                 <textarea
                   ref={textareaRef}
@@ -95,6 +107,7 @@ export default function Comment({
                 ></textarea>
                 <div className="hidden group-hover:flex">
                   <ThreeDotComment
+                    setIsReplying={setIsReplying}
                     setEdit={setEdit}
                     options={CommentOptions}
                     comment={comment}
@@ -115,14 +128,15 @@ export default function Comment({
 
               {/* comment-button */}
               <div className="flex gap-[10px]">
-                <p className="text-gray-500 hover:cursor-pointer">Thích</p>
+                {/* <p className="text-gray-500 hover:cursor-pointer">Thích</p> */}
+                <CommentLikeButton comment={comment}></CommentLikeButton>
                 {!isReplying && (
                   <p
                     onClick={() => {
                       setIsReplying(true);
                       setEdit(false);
                     }}
-                    className="text-gray-500 hover:cursor-pointer"
+                    className="text-gray-500 hover:cursor-pointer text-lg hover-underline-animation"
                   >
                     Trả lời
                   </p>
@@ -130,7 +144,7 @@ export default function Comment({
                 {isReplying && (
                   <p
                     onClick={() => setIsReplying(false)}
-                    className="text-gray-500 hover:cursor-pointer"
+                    className="text-gray-500 hover:cursor-pointer text-lg hover-underline-animation"
                   >
                     Hủy
                   </p>
@@ -139,16 +153,16 @@ export default function Comment({
                   <div>
                     <p
                       onClick={() => setShowReply(true)}
-                      className={`text-gray-500 hover:cursor-pointer ${
-                        showReply ? "hidden" : ""
+                      className={`text-gray-500 hover:cursor-pointer text-lg  ${
+                        showReply ? "hidden" : "hover-underline-animation"
                       }`}
                     >
                       Hiển thị trả lời
                     </p>
                     <p
                       onClick={() => setShowReply(false)}
-                      className={`text-gray-500 hover:cursor-pointer ${
-                        showReply ? "" : "hidden"
+                      className={`text-gray-500 hover:cursor-pointer text-lg  ${
+                        showReply ? "hover-underline-animation" : "hidden"
                       }`}
                     >
                       Ẩn trả lời
@@ -158,7 +172,7 @@ export default function Comment({
                 {edit == true && (
                   <p
                     onClick={() => setEdit(false)}
-                    className="text-gray-500 hover:cursor-pointer"
+                    className="text-gray-500 hover:cursor-pointer text-lg hover-underline-animation"
                   >
                     Hủy
                   </p>

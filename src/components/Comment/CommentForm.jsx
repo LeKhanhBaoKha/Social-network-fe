@@ -13,10 +13,8 @@ export default function CommentForm({
   setEdit,
   setComments,
   ListOfComments,
-  setParentComment,
-  setCommentListKey,
   userData,
-  post,
+  setNewComment,
 }) {
   const [width, setWidth] = useState(commentWidth);
   const [comment, setComment] = useState(commentData);
@@ -87,6 +85,7 @@ export default function CommentForm({
             NotificationManager.success(response?.data?.meta?.message);
             setIsReplying(false);
             setComments([...ListOfComments, response?.data?.data]);
+            setNewComment(response?.data?.data);
           } else {
             NotificationManager.error(response?.data?.meta?.message);
           }
@@ -135,7 +134,7 @@ export default function CommentForm({
         className={`p-2 ${width} h-[50px] max-w-[650px] text-base border border-gray-300 focus:outline-none bg-purple-50 rounded-xl resize-none`}
         // className="p-2 w-[400px] max-w-[500px] text-base border border-gray-300 focus:outline-none bg-purple-50 rounded-xl resize-none"
       ></textarea>
-      <div className="translate-x-[-200%]">
+      <div className="translate-x-[-200%] z-50">
         <EmojiWindow setEmoji={setChosenEmoji}></EmojiWindow>
       </div>
       <div

@@ -174,11 +174,21 @@ export default function EditPost({ post, setOpenEdit, setPost }) {
           </div>
           <div className="flex">
             <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
-              <img className="" src={post.user.avatar} alt="ảnh đại diện"></img>
+              <img
+                className=""
+                src={
+                  post.user.avatar.includes("http")
+                    ? post.user.avatar
+                    : imageUrl + post.user.avatar
+                }
+                alt="ảnh đại diện"
+              ></img>
             </div>
 
             <div className="my-[10px] flex flex-col">
-              <p className="font-semibold ">{post.user.username}</p>
+              <p className="font-semibold ">
+                {post.user.first_name + " " + post.user.last_name}
+              </p>
               <button
                 onClick={onOpenAudience}
                 className="flex items-center gap-[2px] font-semibold py-1 px-2 bg-gray-300 rounded-xl hover:bg-gray-200 transition-colors"

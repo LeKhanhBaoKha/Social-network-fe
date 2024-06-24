@@ -94,3 +94,15 @@
   font-weight: 900;
   font-style: italic;
 }
+
+.hover-underline-animation {
+  @apply inline-block relative;
+}
+
+.hover-underline-animation::after {
+  @apply dark:bg-white bg-gray-600 content-[''] absolute w-full scale-x-0 h-[2px] bottom-0 left-0 origin-left transition-all duration-200 ease-in-out;
+}
+
+.hover-underline-animation:hover::after {
+  @apply scale-x-100;
+}

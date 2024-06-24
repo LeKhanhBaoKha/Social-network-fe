@@ -82,7 +82,6 @@ function App() {
           <Route path="components" element={<Components />}></Route>
           <Route path="profile" element={<Profile />}></Route>
           <Route path="about" element={<Introduce />}></Route>
-          <Route path="friends" element={<FriendTab />}></Route>
           <Route path="album" element={<AlbumTab />}></Route>
           <Route path="chatbox" element={<Chatbox />}></Route>
           <Route path="story" element={<Story />}></Route>
@@ -92,6 +91,7 @@ function App() {
           <Route path="threedot" element={<ThreeDotButton />}></Route>
           <Route path="create" element={<CreatePost />}></Route>
           <Route path="chat" element={<PageChat />}></Route>
+          <Route path="profile/:user_id" element={<Profile />}></Route>
         </Route>
         <Route path="auth/login" element={<PageLogin />}>
           {" "}

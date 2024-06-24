@@ -7,7 +7,14 @@ import APIPost from "../../api/post/APIPost";
 import "../../assets/scss/components/CreatePost/CreatePost.scss";
 import EditPost from "../Post/EditPost/EditPost";
 
-const ThreeDotButton = ({ options = [], onOptionSelect, post, setPost }) => {
+const ThreeDotButton = ({
+  options = [],
+  onOptionSelect,
+  post,
+  setPost,
+  user_id,
+  sharePost,
+}) => {
   const [openHidden, setOpenHidden] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -16,7 +23,12 @@ const ThreeDotButton = ({ options = [], onOptionSelect, post, setPost }) => {
   const handleDelete = async (post_id) => {
     console.log(post_id);
     try {
-      const response = await APIPost.delete({ post_id });
+      var response = null;
+      if (sharePost === true) {
+        response = await APIPost.deleteShare({ post_id });
+      } else {
+        response = await APIPost.delete({ post_id });
+      }
       console.log("response", response);
       if (response?.data?.meta?.statusCode === 200) {
         NotificationManager.success(response?.data?.meta?.message);
@@ -28,6 +40,7 @@ const ThreeDotButton = ({ options = [], onOptionSelect, post, setPost }) => {
       console.error("Error:", error);
     }
     setOpenDelete(false);
+    setPost(null);
   };
 
   const handleHide = async (post_id) => {

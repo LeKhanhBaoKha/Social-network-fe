@@ -3,7 +3,7 @@ import axiosClientFormData from "../axiosClientFormData";
 
 const APIComment = {
   getParentComment(data) {
-    const url = `/api/comment/getparent/${data}`;
+    const url = `/api/comment/getComments/${data}`;
     return axiosClient.get(url, data);
   },
   getChildComment(data) {
@@ -24,6 +24,10 @@ const APIComment = {
     const url = "/api/comment/delete";
     console.log("delete data", data);
     return axiosClient.delete(url, { data });
+  },
+  like(data) {
+    const url = "/api/comment/likeComment";
+    return axiosClientFormData.post(url, data);
   },
 };
 export default APIComment;

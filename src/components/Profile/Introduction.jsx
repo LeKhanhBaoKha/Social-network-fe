@@ -11,8 +11,12 @@ export function Introduction() {
   };
 
   return (
-    <div className="w-[560px] lg:w-[360px] min-h-[350px] bg-white border rounded-xl">
-      <div className="m-4 flex gap-[10px] flex-col">
+    <div className="w-[560px] lg:w-[360px] min-h-[290px] bg-white border rounded-xl">
+      <img
+        src="https://media.licdn.com/dms/image/D5612AQEdXNxJ0QBowQ/article-cover_image-shrink_720_1280/0/1684426265674?e=2147483647&v=beta&t=bZJRs_E9a_P_ovnGaoKDBIOXRn2hZ-aHfHr6-gLN920"
+        className="object-fill rounded-xl"
+      ></img>
+      {/* <div className="m-4 flex gap-[10px] flex-col">
         <h1 className="font-bold text-lg">Giới thiệu</h1>
         <button className="w-full p-2 bg-gray-300 rounded-lg text-lg hover:bg-gray-200 transition-colors">
           Thêm tiểu sử
@@ -40,7 +44,7 @@ export function Introduction() {
         <button className="w-full p-2 bg-gray-300 rounded-lg text-lg hover:bg-gray-200 transition-colors">
           Chỉnh sửa chi tiết
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -9,7 +9,13 @@ import EditPost from "../Post/EditPost/EditPost";
 import APIComment from "../../api/comment/APIComment";
 import CommentForm from "../Comment/CommentForm";
 
-const ThreeDotComment = ({ options = [], comment, setComment, setEdit }) => {
+const ThreeDotComment = ({
+  options = [],
+  comment,
+  setComment,
+  setEdit,
+  setIsReplying,
+}) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +57,7 @@ const ThreeDotComment = ({ options = [], comment, setComment, setEdit }) => {
       NotificationManager.error(error?.response?.data?.meta?.message);
       console.error("Error:", error);
     }
+    setIsReplying(false);
     setOpenDelete(false);
     setComment(null);
   };
@@ -96,6 +103,7 @@ const ThreeDotComment = ({ options = [], comment, setComment, setEdit }) => {
                     if (key === "edit") {
                       setOpenEdit(true);
                       setEdit(true);
+                      setIsReplying(false);
                     } else {
                       setOpenDelete(true);
                     }

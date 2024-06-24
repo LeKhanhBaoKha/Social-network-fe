@@ -27,7 +27,8 @@ import EmojiWindow from "./EmojiPicker";
 import APIPost from "../../api/post/APIPost";
 import { NotificationManager } from "react-notifications";
 
-export default function CreatePost() {
+export default function CreatePost({ user, setPost, posts, onNewPost }) {
+  const imageUrl = "http://localhost:8000/storage/posts/";
   const [files, setFiles] = useState([]);
   const [text, setText] = useState("");
   const [chosenEmoji, setChosenEmoji] = useState(null);
@@ -55,14 +56,13 @@ export default function CreatePost() {
     };
     files.forEach((file) => {
       if (file.type.startsWith("image")) {
-        // console.log("blob:", file.url);
         updatedData.post_pictures.push(file);
       } else if (file.type.startsWith("video")) {
         updatedData.post_videos.push(file);
       }
     });
     setData(updatedData);
-    console.log("sending data:", updatedData);
+    // console.log("sending data:", updatedData);
   };
 
   useEffect(() => {
@@ -71,6 +71,8 @@ export default function CreatePost() {
         const response = await APIPost.create(data);
         if (response?.data?.meta?.statusCode === 200) {
           NotificationManager.success(response?.data?.meta?.message);
+          setPost([response?.data?.data[0], ...posts]);
+          console.log(response?.data?.data[0]);
         } else {
           NotificationManager.error(response?.data?.meta?.message);
         }
@@ -150,11 +152,12 @@ export default function CreatePost() {
 
   return (
     <div className="flex w-[560px] lg:w-[500px] border bg-white rounded-xl p-1 justify-center items-center ">
-      <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
-        <img
-          src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-1/317816571_1806291249705020_3619995257127480928_n.jpg?stp=c0.15.160.160a_dst-jpg_p160x160&_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=LdP56erkWXUQ7kNvgFaf4M_&_nc_ht=scontent.fsgn5-9.fna&oh=00_AYB0VFmnatj5nEwRkHQbkv1A5qymTzlTM2l3AlBZIbk6Iw&oe=66496CDC"
-          alt=""
-        />
+      <div className="bg-gray-300 m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
+        {user?.avatar?.includes("http") ? (
+          <img src={user?.avatar} alt="" />
+        ) : (
+          <img src={imageUrl + user?.avatar} alt="" />
+        )}
       </div>
       <button
         onClick={onOpenModal}
@@ -177,17 +180,19 @@ export default function CreatePost() {
             <div className="font-bold text-xl text-center border-b pb-[10px]">
               Tạo bài viết
             </div>
-            <div className="flex">
-              <div className="m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
-                <img
-                  className=""
-                  src="https://m.media-amazon.com/images/M/MV5BMTc3MzY3MjQ3OV5BMl5BanBnXkFtZTcwODI3NjQxMw@@._V1_.jpg"
-                  alt="ảnh đại diện"
-                ></img>
+            <div className="flex items-center">
+              <div className="bg-slate-300 m-[10px] w-[50px] h-[50px] overflow-hidden rounded-full">
+                {user?.avatar?.includes("http") ? (
+                  <img src={user?.avatar} alt="" />
+                ) : (
+                  <img src={imageUrl + user?.avatar} alt="" />
+                )}
               </div>
 
               <div className="my-[10px] flex flex-col">
-                <p className="">Name</p>
+                <p className="font-semibold text-lg">
+                  {user?.first_name + " " + user?.last_name}
+                </p>
                 <button
                   onClick={onOpenAudience}
                   className="flex items-center gap-[2px] font-semibold py-1 px-2 bg-gray-300 rounded-xl hover:bg-gray-200 transition-colors"

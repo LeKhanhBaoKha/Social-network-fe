@@ -21,11 +21,24 @@ export default function DetailPost({ picture }) {
     <div className="w-[900px] h-screen flex justify-center lg:flex-row flex-col ">
       {/* Content */}
       <div className="w-[800px] h-[620px] flex justify-center">
-        <img
+        {picture.includes("http") ? (
+          <img
+            className="w-auto h-auto max-w-full max-h-full object-scale-down g"
+            src={picture}
+            alt=""
+          />
+        ) : (
+          <img
+            className="w-auto h-auto max-w-full max-h-full object-scale-down g"
+            src={imageUrl + picture}
+            alt=""
+          />
+        )}
+        {/* <img
           className="w-auto h-auto max-w-full max-h-full object-scale-down g"
           src={imageUrl + picture}
           alt=""
-        />
+        /> */}
       </div>
       {/* end-Content */}
 
